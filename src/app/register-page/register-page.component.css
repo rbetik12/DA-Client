@@ -1,3 +1,14 @@
+.register-wrapper {
+    margin-top: 1em;
+    text-align: center;
+}
+
+.register-container {
+    width: 50%;
+    display: inline-block;
+    padding: 1em;
+}
+
 mat-radio-button {
     margin-right: 1em;
 }
@@ -7,8 +18,34 @@ mat-radio-button {
     margin-bottom: 0.5em;
 }
 
+mat-form-field {
+    width: 100%;
+}
+
 button {
     background-color: #673ab7;
     color: white;
     font-weight: bold;
+}
+
+app-interests-list {
+    text-align: left;
+}
+
+h1 {
+    width: 100%;
+    background-color: #673ab7;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    padding: 0.2em;
+    position: fixed;
+    z-index: 1;
+    box-shadow: -5px 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+@media all and (max-width: 1024px){
+    .register-container {
+        width: 70%;
+    }
 }
