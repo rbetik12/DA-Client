@@ -26,5 +26,6 @@
             <textarea matInput placeholder="About yourself"></textarea>
         </mat-form-field>
         <br>
+        <app-interests-list (selected)="onSelect($event)"></app-interests-list>
     </form>
 </div>

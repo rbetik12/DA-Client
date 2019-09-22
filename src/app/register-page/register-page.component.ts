@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatListOption } from '@angular/material';
 
 @Component({
-  selector: 'app-register-page',
-  templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.css']
+    selector: 'app-register-page',
+    templateUrl: './register-page.component.html',
+    styleUrls: ['./register-page.component.css']
 })
-export class RegisterPageComponent implements OnInit {
+export class RegisterPageComponent {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+    onSelect(selectedOptions: MatListOption[]) {
+        for (const a of selectedOptions) {
+            console.log(a.value);
+        }
+    }
 
 }

@@ -2,21 +2,32 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { MatFormFieldModule, MatInputModule, MatRadioModule, MatTreeModule } from '@angular/material';
+import {
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatListModule,
+    MatTreeModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatButtonModule,
+} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { InterestsListComponent } from './interests-list/interests-list.component';
 
 const routes: Routes = [
     {
-        path: '', component: RegisterPageComponent
-    }
+        path: '', component: RegisterPageComponent,
+    },
 ];
 
 @NgModule({
     declarations: [
         AppComponent,
         RegisterPageComponent,
+        InterestsListComponent,
     ],
     imports: [
         BrowserModule,
@@ -25,13 +36,21 @@ const routes: Routes = [
         MatInputModule,
         MatFormFieldModule,
         MatRadioModule,
+        MatListModule,
         MatTreeModule,
+        MatCheckboxModule,
+        MatIconModule,
+        MatButtonModule,
     ],
     exports: [
         MatInputModule,
         MatFormFieldModule,
         MatRadioModule,
+        MatListModule,
         MatTreeModule,
+        MatCheckboxModule,
+        MatIconModule,
+        MatButtonModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
