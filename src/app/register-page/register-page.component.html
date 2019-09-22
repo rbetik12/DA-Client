@@ -1,31 +1,33 @@
 <div class="register-container">
     <h1>Registration form</h1>
-    <form class="registration-form">
+    <form class="registration-form" (submit)="onSubmit($event)" >
         <mat-form-field>
-            <input matInput placeholder="Email">
+            <input matInput placeholder="Email" [(ngModel)]="email" name="email">
         </mat-form-field>
         <br>
         <mat-form-field>
-            <input matInput placeholder="Password" type="password">
+            <input matInput placeholder="Password" type="password" [(ngModel)]="password" name="password">
         </mat-form-field>
         <br>
         <mat-form-field>
-            <input matInput placeholder="Name">
+            <input matInput placeholder="Name" [(ngModel)]="name" name="name">
         </mat-form-field>
         <br>
         <mat-form-field>
-            <input matInput placeholder="Age">
+            <input matInput placeholder="Age" [(ngModel)]="age" name="age">
         </mat-form-field>
         <br>
-        <mat-radio-group aria-label="Select your gender">
-            <mat-radio-button value="M">Man</mat-radio-button>
-            <mat-radio-button value="F">Woman</mat-radio-button>
+        <mat-radio-group aria-label="Select your gender" [(ngModel)]="gender" name="gender">
+            <mat-radio-button value="man">Man</mat-radio-button>
+            <mat-radio-button value="woman" >Woman</mat-radio-button>
         </mat-radio-group>
         <br>
-        <mat-form-field>
-            <textarea matInput placeholder="About yourself"></textarea>
+        <mat-form-field class="about-me">
+            <textarea matInput placeholder="About yourself" [(ngModel)]="about" name="aboutme"></textarea>
         </mat-form-field>
         <br>
         <app-interests-list (selected)="onSelect($event)"></app-interests-list>
+        <br>
+        <button mat-raised-button>Submit</button>
     </form>
 </div>

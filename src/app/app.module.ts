@@ -16,6 +16,7 @@ import {
 import { AppComponent } from './app.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { InterestsListComponent } from './interests-list/interests-list.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
     {
@@ -41,6 +42,7 @@ const routes: Routes = [
         MatCheckboxModule,
         MatIconModule,
         MatButtonModule,
+        FormsModule,
     ],
     exports: [
         MatInputModule,

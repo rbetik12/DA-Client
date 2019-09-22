@@ -1,3 +1,14 @@
 mat-radio-button {
     margin-right: 1em;
 }
+
+.about-me{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+button {
+    background-color: #673ab7;
+    color: white;
+    font-weight: bold;
+}
