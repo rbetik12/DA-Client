@@ -18,10 +18,14 @@ import { AppComponent } from './app.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { InterestsListComponent } from './interests-list/interests-list.component';
 import { FormsModule } from '@angular/forms';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 const routes: Routes = [
     {
-        path: '', component: RegisterPageComponent,
+        path: '', component: LoginPageComponent,
+    },
+    {
+        path: 'registration', component: RegisterPageComponent
     },
 ];
 
@@ -30,6 +34,7 @@ const routes: Routes = [
         AppComponent,
         RegisterPageComponent,
         InterestsListComponent,
+        LoginPageComponent,
     ],
     imports: [
         BrowserModule,
