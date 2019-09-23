@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatListOption } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 export interface User {
     name: string;
@@ -9,8 +10,15 @@ export interface User {
     age: number;
     about: string;
     interests: string[];
+
     [key: string]: any;
 }
+
+
+const validators = {
+    email: Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]'
+        + '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'),
+};
 
 @Component({
     selector: 'app-register-page',
@@ -19,16 +27,32 @@ export interface User {
 })
 export class RegisterPageComponent {
 
+    constructor() {
+        console.log(this.registrationForm.controls.email.valid);
+    }
+
     registrationForm = new FormGroup({
-        email: new FormControl(''),
-        password: new FormControl(''),
-        name: new FormControl(''),
-        age: new FormControl(''),
-        gender: new FormControl(''),
+        email: new FormControl('', [
+            Validators.required,
+            validators.email,
+        ]),
+        password: new FormControl('', [
+            Validators.required,
+            Validators.minLength(6),
+        ]),
+        name: new FormControl('', [
+            Validators.required,
+        ]),
+        age: new FormControl('', [
+            Validators.required,
+        ]),
+        gender: new FormControl('', [
+            Validators.required
+        ]),
         about: new FormControl(''),
     });
 
-    interests: string[];
+    interests: string[] = [];
     newUser: User;
 
     onSelect(selectedOptions: MatListOption[]) {

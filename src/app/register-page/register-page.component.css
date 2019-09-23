@@ -13,7 +13,7 @@ mat-radio-button {
     margin-right: 1em;
 }
 
-.about-me{
+.about-me {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
@@ -44,7 +44,12 @@ h1 {
     box-shadow: -5px 1px 6px rgba(0, 0, 0, 0.5);
 }
 
-@media all and (max-width: 1024px){
+.error {
+    font-size: 12px;
+    color: gray;
+}
+
+@media all and (max-width: 1024px) {
     .register-container {
         width: 70%;
     }
