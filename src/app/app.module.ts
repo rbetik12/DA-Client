@@ -12,6 +12,7 @@ import {
     MatIconModule,
     MatButtonModule,
 } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
@@ -43,6 +44,7 @@ const routes: Routes = [
         MatIconModule,
         MatButtonModule,
         FormsModule,
+        ReactiveFormsModule
     ],
     exports: [
         MatInputModule,

@@ -2,30 +2,30 @@
 <div>&nbsp;</div>
 <div class="register-wrapper">
     <div class="register-container">
-        <form class="registration-form" (submit)="onSubmit($event)">
+        <form class="registration-form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()" >
             <mat-form-field>
-                <input matInput placeholder="Email" [(ngModel)]="email" name="email">
+                <input matInput placeholder="Email" name="email" formControlName="email">
             </mat-form-field>
             <br>
             <mat-form-field>
-                <input matInput placeholder="Password" type="password" [(ngModel)]="password" name="password">
+                <input matInput placeholder="Password" type="password" name="password" formControlName="password">
             </mat-form-field>
             <br>
             <mat-form-field>
-                <input matInput placeholder="Name" [(ngModel)]="name" name="name">
+                <input matInput placeholder="Name" name="name" formControlName="name">
             </mat-form-field>
             <br>
             <mat-form-field>
-                <input matInput placeholder="Age" [(ngModel)]="age" name="age">
+                <input matInput placeholder="Age" name="age" formControlName="age">
             </mat-form-field>
             <br>
-            <mat-radio-group aria-label="Select your gender" [(ngModel)]="gender" name="gender">
+            <mat-radio-group aria-label="Select your gender" name="gender" formControlName="gender">
                 <mat-radio-button value="man">Man</mat-radio-button>
                 <mat-radio-button value="woman">Woman</mat-radio-button>
             </mat-radio-group>
             <br>
             <mat-form-field class="about-me">
-                <textarea matInput placeholder="About yourself" [(ngModel)]="about" name="aboutme"></textarea>
+                <textarea matInput placeholder="About yourself" name="aboutme" formControlName="about"></textarea>
             </mat-form-field>
             <br>
             <app-interests-list (selected)="onSelect($event)"></app-interests-list>
