@@ -47,6 +47,7 @@ h1 {
 .error {
     font-size: 12px;
     color: gray;
+    text-align: right;
 }
 
 .gender {
