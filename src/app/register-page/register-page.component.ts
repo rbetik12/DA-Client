@@ -27,9 +27,7 @@ const validators = {
 })
 export class RegisterPageComponent {
 
-    constructor() {
-        console.log(this.registrationForm.controls.email.valid);
-    }
+    title = 'Registration';
 
     registrationForm = new FormGroup({
         email: new FormControl('', [
