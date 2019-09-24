@@ -1,0 +1,11 @@
+button {
+    background-color: #673ab7;
+    color: white;
+    font-weight: bold;
+}
+
+.error {
+    font-size: 12px;
+    color: gray;
+    text-align: right;
+}

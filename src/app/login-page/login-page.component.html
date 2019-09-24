@@ -1,1 +1,20 @@
-<p>login-page works!</p>
+<!--<app-top-bar [title]="title"></app-top-bar>-->
+<div>&#160;</div>
+<div class="login-form-wrapper">
+    <div class="login-form-container">
+        <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <mat-form-field>
+                <input matInput placeholder="Email" name="email" formControlName="email">
+            </mat-form-field>
+            <div *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.touched"
+                 class="error">Invalid email
+            </div>
+            <br>
+            <mat-form-field>
+                <input matInput placeholder="Password" type="password" name="password" formControlName="password">
+            </mat-form-field>
+            <br>
+            <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Submit</button>
+        </form>
+    </div>
+</div>
