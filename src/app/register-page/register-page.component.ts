@@ -15,7 +15,7 @@ export interface User {
 }
 
 
-const validators = {
+export const validators = {
     email: Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]'
         + '{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'),
 };
@@ -27,9 +27,7 @@ const validators = {
 })
 export class RegisterPageComponent {
 
-    constructor() {
-        console.log(this.registrationForm.controls.email.valid);
-    }
+    title = 'Registration';
 
     registrationForm = new FormGroup({
         email: new FormControl('', [
