@@ -9,3 +9,39 @@ button {
     color: gray;
     text-align: right;
 }
+
+.login-form-wrapper {
+    margin-top: 5em;
+    text-align: center;
+}
+
+.login-form-container {
+    width: 20%;
+    display: inline-block;
+    padding: 1em;
+    border-radius: 4%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.link {
+    color: gray;
+}
+
+.link:hover {
+    color: #673ab7;
+}
+
+@media all and (max-width: 1024px) {
+    .login-form-container {
+        width: 50%;
+    }
+}
+
+@media all and (max-width: 512px) {
+    .login-form-container {
+        width: 70%;
+    }
+}

@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { validators } from '../register-page/register-page.component';
 
+export interface LoginInfo {
+    email: string;
+    password: string;
+}
+
 @Component({
     selector: 'app-login-page',
     templateUrl: './login-page.component.html',
@@ -20,7 +25,11 @@ export class LoginPageComponent {
         ])
     });
 
-    onSubmit() {
+    userInfo: LoginInfo = {email: null, password: null};
 
+    onSubmit() {
+        this.userInfo.email = this.loginForm.value.email;
+        this.userInfo.password = this.loginForm.value.password;
+        console.table(this.userInfo);
     }
 }
