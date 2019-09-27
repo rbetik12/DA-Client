@@ -78,6 +78,8 @@ export class RegisterPageComponent {
         console.table(user);
         this.auth.register(user).subscribe(res => {
             console.log(res);
+        }, error => {
+            console.error(error);
         });
     }
 
