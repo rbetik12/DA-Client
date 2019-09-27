@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatListOption } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 export interface User {
     name: string;
@@ -27,6 +28,9 @@ export const validators = {
 })
 export class RegisterPageComponent {
 
+    constructor(private auth: AuthService) {
+    }
+
     title = 'Registration';
 
     registrationForm = new FormGroup({
@@ -51,7 +55,6 @@ export class RegisterPageComponent {
     });
 
     interests: string[] = [];
-    newUser: User;
 
     onSelect(selectedOptions: MatListOption[]) {
         this.interests = [];
@@ -62,7 +65,7 @@ export class RegisterPageComponent {
 
     onSubmit() {
         const info = this.registrationForm.value as User;
-        this.newUser = {
+        const user: User = {
             name: info.name,
             email: info.email,
             password: info.password,
@@ -72,7 +75,10 @@ export class RegisterPageComponent {
             interests: this.interests
         };
 
-        console.table(this.newUser);
+        console.table(user);
+        this.auth.register(user).subscribe(res => {
+            console.log(res);
+        });
     }
 
 }

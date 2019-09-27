@@ -13,6 +13,7 @@ import {
     MatButtonModule,
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
@@ -57,7 +58,8 @@ const routes: Routes = [
         MatIconModule,
         MatButtonModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpClientModule
     ],
     exports: [
         MatInputModule,
