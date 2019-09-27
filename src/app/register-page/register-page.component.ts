@@ -78,7 +78,7 @@ export class RegisterPageComponent {
 
         console.table(user);
         this.auth.register(user).subscribe(res => {
-            console.log(res);
+            this.router.navigateByUrl('/login').then(r => {});
         }, error => {
             console.error(error);
         });
