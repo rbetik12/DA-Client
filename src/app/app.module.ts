@@ -20,14 +20,19 @@ import { InterestsListComponent } from './interests-list/interests-list.componen
 import { FormsModule } from '@angular/forms';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
     {
-        path: '', component: LoginPageComponent,
+        path: '', component: MainPageComponent, canActivate: [AuthGuard]
     },
     {
         path: 'register', component: RegisterPageComponent
     },
+    {
+        path: 'login', component: LoginPageComponent
+    }
 ];
 
 @NgModule({
@@ -37,6 +42,7 @@ const routes: Routes = [
         InterestsListComponent,
         LoginPageComponent,
         TopBarComponent,
+        MainPageComponent,
     ],
     imports: [
         BrowserModule,
