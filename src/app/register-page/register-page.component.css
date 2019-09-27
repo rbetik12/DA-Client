@@ -50,6 +50,10 @@ app-interests-list {
     float: left;
 }
 
+.back-button {
+    margin-top: 1em;
+}
+
 @media all and (max-width: 1024px) {
     .register-container {
         width: 70%;

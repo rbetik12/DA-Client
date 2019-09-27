@@ -3,6 +3,7 @@ import { MatListOption } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 export interface User {
     name: string;
@@ -28,7 +29,7 @@ export const validators = {
 })
 export class RegisterPageComponent {
 
-    constructor(private auth: AuthService) {
+    constructor(private auth: AuthService, private router: Router) {
     }
 
     title = 'Registration';
@@ -81,6 +82,10 @@ export class RegisterPageComponent {
         }, error => {
             console.error(error);
         });
+    }
+
+    goBack() {
+        this.router.navigateByUrl('/login').then(r => {});
     }
 
 }
