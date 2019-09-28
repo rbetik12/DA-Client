@@ -13,7 +13,7 @@ import {
     MatButtonModule,
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
@@ -23,6 +23,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { AuthGuard } from './services/auth.guard';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
     {
@@ -71,7 +73,15 @@ const routes: Routes = [
         MatIconModule,
         MatButtonModule,
     ],
-    providers: [],
+    providers: [
+        AuthGuard,
+        AuthService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptorService,
+            multi: true,
+        }
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {

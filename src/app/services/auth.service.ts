@@ -50,4 +50,8 @@ export class AuthService {
             return new Date().getTime() < Number.parseInt(expiresAt, 10);
         }
     }
+
+    getToken() {
+        return localStorage.getItem('session_token');
+    }
 }
