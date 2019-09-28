@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { validators } from '../register-page/register-page.component';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 export interface LoginInfo {
     email: string;
@@ -34,20 +35,14 @@ export class LoginPageComponent {
 
     onSubmit() {
         const loginInfo: LoginInfo = { email: this.loginForm.value.email, password: this.loginForm.value.password };
-        this.auth.login(loginInfo)
-            .subscribe(
-                res => {
-                    console.log(res);
-                    if (res.status === 200) {
-                        this.auth.setSession();
-                        this.router.navigateByUrl('/app').then(result => {
-                        });
-                    }
-                },
-                error => {
-                    if (error.status === 404) {
-                        this.error = true;
-                    }
+        this.auth.login(loginInfo).pipe(first()).subscribe(res => {
+                this.error = false;
+                this.router.navigateByUrl('/app').then(r => {
                 });
+            },
+            error => {
+                console.error(`${error.status} ${error.statusText}`);
+                this.error = true;
+            });
     }
 }
