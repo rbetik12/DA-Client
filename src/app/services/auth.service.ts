@@ -29,4 +29,8 @@ export class AuthService {
     setSession(): void {
         this.logged = true;
     }
+
+    logout(): void {
+        this.logged = false;
+    }
 }
