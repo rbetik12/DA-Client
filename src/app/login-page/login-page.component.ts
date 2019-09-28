@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { validators } from '../register-page/register-page.component';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 export interface LoginInfo {
     email: string;
@@ -13,7 +15,12 @@ export interface LoginInfo {
     styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent {
+
+    constructor(private auth: AuthService, private router: Router) {
+    }
+
     title = 'AppName';
+    error = false;
 
     loginForm = new FormGroup({
         email: new FormControl('', [
@@ -25,11 +32,22 @@ export class LoginPageComponent {
         ])
     });
 
-    userInfo: LoginInfo = {email: null, password: null};
-
     onSubmit() {
-        this.userInfo.email = this.loginForm.value.email;
-        this.userInfo.password = this.loginForm.value.password;
-        console.table(this.userInfo);
+        const loginInfo: LoginInfo = { email: this.loginForm.value.email, password: this.loginForm.value.password };
+        this.auth.login(loginInfo)
+            .subscribe(
+                res => {
+                    console.log(res);
+                    if (res.status === 200) {
+                        this.auth.setSession();
+                        this.router.navigateByUrl('/app').then(result => {
+                        });
+                    }
+                },
+                error => {
+                    if (error.status === 404) {
+                        this.error = true;
+                    }
+                });
     }
 }
