@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { InterestsListComponent } from './interests-list/interests-list.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'login', pathMatch: 'full'},
+    {path: '', component: ProfilePageComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginPageComponent},
-    {path: 'int', component: InterestsListComponent},
     {path: 'register', component: RegisterPageComponent}
 ];
 

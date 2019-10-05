@@ -15,6 +15,10 @@ import { InterestsListComponent } from './interests-list/interests-list.componen
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TopBarComponent } from './top-bar/top-bar.component';
+import { AuthService } from './services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './services/auth.guard';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 @NgModule({
     declarations: [
@@ -22,10 +26,12 @@ import { TopBarComponent } from './top-bar/top-bar.component';
         LoginPageComponent,
         InterestsListComponent,
         RegisterPageComponent,
-        TopBarComponent
+        TopBarComponent,
+        ProfilePageComponent
     ],
     entryComponents: [],
     imports: [
+        HttpClientModule,
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
@@ -41,6 +47,8 @@ import { TopBarComponent } from './top-bar/top-bar.component';
     providers: [
         StatusBar,
         SplashScreen,
+        AuthService,
+        AuthGuard,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     exports: [

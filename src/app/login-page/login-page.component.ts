@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { validators } from '../register-page/register-page.component';
-// import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
 
 export interface LoginInfo {
     email: string;
@@ -17,7 +17,7 @@ export interface LoginInfo {
 })
 export class LoginPageComponent {
 
-    constructor(private router: Router) {
+    constructor(private auth: AuthService, private router: Router) {
     }
 
     title = 'AppName';
@@ -35,14 +35,14 @@ export class LoginPageComponent {
 
     onSubmit() {
         const loginInfo: LoginInfo = { email: this.loginForm.value.email, password: this.loginForm.value.password };
-        // this.auth.login(loginInfo).pipe(first()).subscribe(res => {
-        //         this.error = false;
-        //         this.router.navigateByUrl('').then(r => {
-        //         });
-        //     },
-        //     error => {
-        //         console.error(`${error.status} ${error.statusText}`);
-        //         this.error = true;
-        //     });
+        this.auth.login(loginInfo).pipe(first()).subscribe(res => {
+                this.error = false;
+                this.router.navigateByUrl('').then(r => {
+                });
+            },
+            error => {
+                console.error(`${error.status} ${error.statusText}`);
+                this.error = true;
+            });
     }
 }

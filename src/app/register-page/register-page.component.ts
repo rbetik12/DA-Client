@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { MatListOption } from '@angular/material';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Validators } from '@angular/forms';
-// import { AuthService } from '../services/auth.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 export interface User {
@@ -29,7 +28,7 @@ export const validators = {
 })
 export class RegisterPageComponent {
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private auth: AuthService) {
     }
 
     title = 'Registration';
@@ -77,11 +76,12 @@ export class RegisterPageComponent {
         };
 
         console.table(user);
-        // this.auth.register(user).subscribe(res => {
-        //     this.router.navigateByUrl('/login').then(r => {});
-        // }, error => {
-        //     console.error(error);
-        // });
+        this.auth.register(user).subscribe(res => {
+            this.router.navigateByUrl('/login').then(r => {
+            });
+        }, error => {
+            console.error(error);
+        });
     }
 
     goBack() {
