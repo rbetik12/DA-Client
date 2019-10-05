@@ -1,0 +1,54 @@
+<app-top-bar [title]="title">Lmao</app-top-bar>
+<div>&nbsp;</div>
+<ion-content class="register-wrapper">
+    <div class="register-container">
+        <form class="registration-form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+            <mat-form-field>
+                <input matInput placeholder="Email" name="email" formControlName="email">
+            </mat-form-field>
+            <div *ngIf="!registrationForm.controls.email.valid && registrationForm.controls.email.touched"
+                 class="error">Invalid email
+            </div>
+            <br>
+            <mat-form-field>
+                <input matInput placeholder="Password" type="password" name="password" formControlName="password">
+            </mat-form-field>
+            <div *ngIf="!registrationForm.controls.password.valid && registrationForm.controls.password.touched"
+                 class="error">Password should be more than 6 symbols length
+            </div>
+            <br>
+            <mat-form-field>
+                <input matInput placeholder="Name" name="name" formControlName="name">
+            </mat-form-field>
+            <div *ngIf="!registrationForm.controls.name.valid && registrationForm.controls.name.touched" class="error">
+                Name is required
+            </div>
+            <br>
+            <mat-form-field>
+                <input matInput placeholder="Age" name="age" formControlName="age">
+            </mat-form-field>
+            <div *ngIf="!registrationForm.controls.age.valid && registrationForm.controls.age.touched" class="error">
+                Age is required
+            </div>
+            <br>
+            <div class="gender">Gender</div>
+            <mat-radio-group aria-label="Select your gender" name="gender" formControlName="gender" class="gender-select">
+                <mat-radio-button value="man">Man</mat-radio-button>
+                <mat-radio-button value="woman">Woman</mat-radio-button>
+            </mat-radio-group>
+            <br>
+            <div *ngIf="!registrationForm.controls.gender.valid" class="error">
+                Gender is required
+            </div>
+            <br>
+            <mat-form-field class="about-me">
+                <textarea matInput placeholder="About yourself" name="aboutme" formControlName="about"></textarea>
+            </mat-form-field>
+            <br>
+            <app-interests-list (selected)="onSelect($event)"></app-interests-list>
+            <br>
+            <button mat-raised-button type="submit" [disabled]="!registrationForm.valid">Submit</button>
+        </form>
+        <button mat-button (click)="goBack()" class="back-button">Go back</button>
+    </div>
+</ion-content>
