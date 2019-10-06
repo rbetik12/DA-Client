@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Storage } from '@ionic/storage';
 
 export interface Photo {
     data: any;
@@ -10,13 +11,9 @@ export interface Photo {
 })
 export class PhotoService {
 
-    public photos: Photo[] = [
-        {
-            data: 'https://www.idyllwildarts.org/wp-content/uploads/2016/09/blank-profile-picture.jpg',
-        }
-    ];
+    public photos: Photo[];
 
-    constructor(private camera: Camera) {
+    constructor(private camera: Camera, private storage: Storage) {
     }
 
     takePicture() {
@@ -34,9 +31,16 @@ export class PhotoService {
             this.photos.unshift({
                 data: 'data:image/jpeg;base64,' + imageData
             });
+            this.storage.set('photos', this.photos);
         }, (err) => {
             // Handle error
             console.log('Camera issue: ' + err);
+        });
+    }
+
+    loadSaved() {
+        this.storage.get('photos').then((photos) => {
+            this.photos = photos ? photos : [{data: 'https://www.idyllwildarts.org/wp-content/uploads/2016/09/blank-profile-picture.jpg'}];
         });
     }
 }

@@ -16,11 +16,13 @@ export class ProfilePageComponent implements OnInit {
     constructor(private auth: AuthService,
                 private router: Router,
                 private platform: Platform,
-                private photoServices: PhotoService) {
+                private photoService: PhotoService) {
     }
 
     ngOnInit() {
         this.width = this.platform.width();
+        this.photoService.loadSaved();
+        console.log(this.photoService.photos);
     }
 
     logout() {
