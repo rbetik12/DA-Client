@@ -1,12 +1,22 @@
-<app-top-bar [title]="title"></app-top-bar>
-<ion-content>
-    <img>
+<!--<app-top-bar [title]="title"></app-top-bar>-->
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="ion-padding">Profile</ion-title>
+    </ion-toolbar>
+</ion-header>
 
-    <ion-fab horizontal="center" slot="fixed" vertical="bottom">
+<ion-content>
+    <ion-slides [options]="{'slidesPerView': '2'}" pager="true">
+        <ion-slide *ngFor="let imageLink of images" class="slide">
+            <img [ngStyle]="{'height': '15em', 'width': width}" [src]="imageLink" alt="Profile image">
+        </ion-slide>
+    </ion-slides>
+    <ion-fab horizontal="end" slot="fixed" vertical="bottom">
         <ion-fab-button>
             <ion-icon name="camera"></ion-icon>
         </ion-fab-button>
+        <button (click)="logout()" mat-flat-button>Logout</button>
     </ion-fab>
-    <!--    <button (click)="logout()" mat-flat-button>Logout</button>-->
+
 </ion-content>
 
