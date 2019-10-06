@@ -1,7 +1,7 @@
-<!--<app-top-bar [title]="title"></app-top-bar>-->
 <ion-header>
     <ion-toolbar>
-        <ion-title class="ion-padding">Profile</ion-title>
+        <ion-title class="ion-padding title">Profile</ion-title>
+        <ion-icon (click)="logout()" class="logout-button" name="exit" size="large"></ion-icon>
     </ion-toolbar>
 </ion-header>
 
@@ -15,8 +15,6 @@
         <ion-fab-button>
             <ion-icon name="camera"></ion-icon>
         </ion-fab-button>
-        <button (click)="logout()" mat-flat-button>Logout</button>
     </ion-fab>
-
 </ion-content>
 

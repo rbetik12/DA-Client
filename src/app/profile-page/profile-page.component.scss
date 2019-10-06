@@ -9,4 +9,13 @@ button {
 
 .logout-button {
   float: right;
+  padding: 0.5em;
+}
+
+.logout-button:active {
+  color: #673ab7;
+}
+
+.title {
+  float: left;
 }
