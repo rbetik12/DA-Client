@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets">
-    <name>MyApp</name>
+<widget xmlns:android="http://schemas.android.com/apk/res/android" id="com.rbetik12.readr" version="0.1.0"
+        xmlns="http://www.w3.org/ns/widgets">
+    <name>READR</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://localhost:8100"/>
+    <content src="index.html"/>
     <access origin="*"/>
     <allow-intent href="http://*/*"/>
     <allow-intent href="https://*/*"/>
@@ -20,10 +21,11 @@
     <preference name="SplashScreen" value="screen"/>
     <preference name="SplashScreenDelay" value="3000"/>
     <platform name="android">
-        <edit-config xmlns:android="http://schemas.android.com/apk/res/android" file="app/src/main/AndroidManifest.xml"
-                     mode="merge" target="/manifest/application">
-            <application android:networkSecurityConfig="@xml/network_security_config"/>
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="true"/>
         </edit-config>
+        <access origin="*"/>
+        <allow-navigation href="*"/>
         <resource-file src="resources/android/xml/network_security_config.xml"
                        target="app/src/main/res/xml/network_security_config.xml"/>
         <allow-intent href="market:*"/>
@@ -101,5 +103,5 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2"/>
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0"/>
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5"/>
-    <allow-navigation href="http://localhost:8100" sessionid="1cc0ac0c"/>
+    <allow-navigation href="http://localhost:8100" sessionid="98fd0af7"/>
 </widget>
