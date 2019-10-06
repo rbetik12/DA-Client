@@ -7,13 +7,12 @@
 
 <ion-content>
     <ion-slides [options]="{'slidesPerView': '2'}" pager="true">
-        <ion-slide *ngFor="let imageLink of images" class="slide">
-            <img *ngIf="currentImage" [ngStyle]="{'height': '15em', 'width': width}" [src]="currentImage"
-                 alt="Profile image">
+        <ion-slide *ngFor="let photo of photoServices.photos" class="slide">
+            <img [ngStyle]="{'height': '15em', 'width': width}" [src]="photo.data">
         </ion-slide>
     </ion-slides>
     <ion-fab horizontal="end" slot="fixed" vertical="bottom">
-        <ion-fab-button (click)="takePicture()">
+        <ion-fab-button (click)="photoServices.takePicture()">
             <ion-icon name="camera"></ion-icon>
         </ion-fab-button>
     </ion-fab>
