@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { PhotoService } from '../services/photo.service';
 
+export class DelPhotoData {
+    [index: number]: number;
+}
+
 @Component({
     selector: 'app-profile-page',
     templateUrl: './profile-page.component.html',
@@ -14,6 +18,8 @@ export class ProfilePageComponent implements OnInit {
     width: number;
     deletePhoto = false;
 
+    delPhotosState: DelPhotoData = {};
+
     constructor(private auth: AuthService,
                 private router: Router,
                 private platform: Platform,
@@ -23,8 +29,8 @@ export class ProfilePageComponent implements OnInit {
     ngOnInit() {
         this.width = this.platform.width();
         this.photoService.loadSaved();
-        console.log(this.photoService.photos);
     }
+
 
     logout() {
         this.auth.logout();
@@ -36,5 +42,29 @@ export class ProfilePageComponent implements OnInit {
         if (photo.src) {
             this.deletePhoto = !this.deletePhoto;
         }
+    }
+
+    onCheckBoxClick(event, delPhotoIndex: number) {
+        if (event.checked) {
+            this.delPhotosState[delPhotoIndex] = delPhotoIndex;
+        } else {
+            this.delPhotosState[delPhotoIndex] = -1;
+        }
+    }
+
+    deletePhotos() {
+        console.log(Object.keys(this.delPhotosState));
+        for (const index of Object.keys(this.delPhotosState)) {
+            if (this.delPhotosState[index] !== -1) {
+                console.log(index);
+                console.log(this.delPhotosState[index]);
+                delete this.photoService.photos[index];
+                console.log(this.photoService.photos[index]);
+            }
+        }
+        this.photoService.photos = this.photoService.photos.filter((el) => {
+            return el != null;
+        });
+        this.deletePhoto = !this.deletePhoto;
     }
 }

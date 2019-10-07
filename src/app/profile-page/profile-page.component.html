@@ -4,17 +4,19 @@
         <ion-icon (click)="logout()" class="logout-button" name="exit" size="large"></ion-icon>
         <div *ngIf="deletePhoto" class="delete-buttons-container">
             <ion-icon (click)="deletePhoto=!deletePhoto" name="close" size="large"></ion-icon>
-            <ion-icon name="checkmark" size="large"></ion-icon>
+            <ion-icon (click)="deletePhotos()" name="checkmark" size="large"></ion-icon>
         </div>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-slides [options]="{'slidesPerView': '2'}" pager="true">
-        <ion-slide (click)="onPhotoClick($event.target)" *ngFor="let photo of photoService.photos" class="slide">
-            <div>
+        <ion-slide (click)="onPhotoClick($event.target)" *ngFor="let photo of photoService.photos; let i = index"
+                   class="slide">
+            <div *ngIf="photo">
                 <img [ngStyle]="{'height': '15em', 'width': width}" [src]="photo.data">
-                <mat-checkbox *ngIf="deletePhoto" [checked]="false" class="delete-checkbox"></mat-checkbox>
+                <mat-checkbox (change)="onCheckBoxClick($event, i)" *ngIf="deletePhoto" [checked]="false"
+                              class="delete-checkbox"></mat-checkbox>
             </div>
         </ion-slide>
     </ion-slides>
