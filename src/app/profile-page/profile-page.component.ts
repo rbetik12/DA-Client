@@ -12,6 +12,7 @@ import { PhotoService } from '../services/photo.service';
 export class ProfilePageComponent implements OnInit {
 
     width: number;
+    deletePhoto = false;
 
     constructor(private auth: AuthService,
                 private router: Router,
@@ -29,5 +30,11 @@ export class ProfilePageComponent implements OnInit {
         this.auth.logout();
         this.router.navigateByUrl('/login').then(r => {
         });
+    }
+
+    onPhotoClick(photo) {
+        if (photo.src) {
+            this.deletePhoto = !this.deletePhoto;
+        }
     }
 }

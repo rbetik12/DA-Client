@@ -7,8 +7,11 @@
 
 <ion-content>
     <ion-slides [options]="{'slidesPerView': '2'}" pager="true">
-        <ion-slide *ngFor="let photo of photoService.photos" class="slide">
-            <img [ngStyle]="{'height': '15em', 'width': width}" [src]="photo.data">
+        <ion-slide (click)="onPhotoClick($event.target)" *ngFor="let photo of photoService.photos" class="slide">
+            <div>
+                <img [ngStyle]="{'height': '15em', 'width': width}" [src]="photo.data">
+                <mat-checkbox *ngIf="deletePhoto" [checked]="false" class="delete-checkbox"></mat-checkbox>
+            </div>
         </ion-slide>
     </ion-slides>
     <ion-fab horizontal="end" slot="fixed" vertical="bottom">

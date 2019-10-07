@@ -19,3 +19,16 @@ button {
 .title {
   float: left;
 }
+
+ion-slide {
+  position: relative;
+}
+
+.delete-checkbox {
+  float: right;
+  position: absolute;
+  right: 0.5em;
+  top: 0;
+  z-index: 1000;
+}
+
