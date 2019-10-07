@@ -3,7 +3,7 @@
         <ion-title class="title">Profile</ion-title>
         <ion-icon (click)="logout()" class="logout-button" name="exit" size="large"></ion-icon>
         <div *ngIf="deletePhoto" class="delete-buttons-container">
-            <ion-icon (click)="deletePhoto=!deletePhoto" name="close" size="large"></ion-icon>
+            <ion-icon (click)="deletePhoto=!deletePhoto; clearIndexesArray()" name="close" size="large"></ion-icon>
             <ion-icon (click)="deletePhotos()" name="checkmark" size="large"></ion-icon>
         </div>
     </ion-toolbar>

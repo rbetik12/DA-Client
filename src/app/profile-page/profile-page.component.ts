@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { PhotoService } from '../services/photo.service';
 
-export class DelPhotoData {
+export class DelPhotoIndex {
     [index: number]: number;
 }
 
@@ -18,7 +18,7 @@ export class ProfilePageComponent implements OnInit {
     width: number;
     deletePhoto = false;
 
-    delPhotosState: DelPhotoData = {};
+    delPhotosIndexes: DelPhotoIndex = {};
 
     constructor(private auth: AuthService,
                 private router: Router,
@@ -46,18 +46,18 @@ export class ProfilePageComponent implements OnInit {
 
     onCheckBoxClick(event, delPhotoIndex: number) {
         if (event.checked) {
-            this.delPhotosState[delPhotoIndex] = delPhotoIndex;
+            this.delPhotosIndexes[delPhotoIndex] = delPhotoIndex;
         } else {
-            this.delPhotosState[delPhotoIndex] = -1;
+            this.delPhotosIndexes[delPhotoIndex] = -1;
         }
     }
 
     deletePhotos() {
-        console.log(Object.keys(this.delPhotosState));
-        for (const index of Object.keys(this.delPhotosState)) {
-            if (this.delPhotosState[index] !== -1) {
+        console.log(Object.keys(this.delPhotosIndexes));
+        for (const index of Object.keys(this.delPhotosIndexes)) {
+            if (this.delPhotosIndexes[index] !== -1) {
                 console.log(index);
-                console.log(this.delPhotosState[index]);
+                console.log(this.delPhotosIndexes[index]);
                 delete this.photoService.photos[index];
                 console.log(this.photoService.photos[index]);
             }
@@ -66,5 +66,13 @@ export class ProfilePageComponent implements OnInit {
             return el != null;
         });
         this.deletePhoto = !this.deletePhoto;
+        this.clearIndexesArray();
+        if (this.photoService.photos.length === 0) {
+            this.photoService.setDefault();
+        }
+    }
+
+    private clearIndexesArray() {
+        this.delPhotosIndexes = {};
     }
 }
