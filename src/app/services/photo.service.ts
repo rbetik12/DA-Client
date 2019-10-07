@@ -47,4 +47,8 @@ export class PhotoService {
     setDefault() {
         this.photos.push({data: 'https://www.idyllwildarts.org/wp-content/uploads/2016/09/blank-profile-picture.jpg'});
     }
+
+    updateStorage() {
+        this.storage.set('photos', this.photos);
+    }
 }

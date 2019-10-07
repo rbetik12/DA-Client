@@ -70,6 +70,7 @@ export class ProfilePageComponent implements OnInit {
         if (this.photoService.photos.length === 0) {
             this.photoService.setDefault();
         }
+        this.photoService.updateStorage();
     }
 
     private clearIndexesArray() {
