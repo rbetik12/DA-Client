@@ -17,7 +17,7 @@ export class ProfilePageComponent implements OnInit {
 
     width: number;
     deletePhoto = false;
-
+    prefAges = {lower: 18, upper: 25};
     delPhotosIndexes: DelPhotoIndex = {};
 
     constructor(private auth: AuthService,
@@ -31,6 +31,9 @@ export class ProfilePageComponent implements OnInit {
         this.photoService.loadSaved();
     }
 
+    showAge() {
+        console.log(this.prefAges);
+    }
 
     logout() {
         this.auth.logout();

@@ -25,5 +25,10 @@
             <ion-icon name="camera"></ion-icon>
         </ion-fab-button>
     </ion-fab>
+
+
+    <ion-range (ionBlur)="showAge()" [(ngModel)]="prefAges" [value]="prefAges" dualKnobs="true" max="99" min="18"
+               pin></ion-range>
+
 </ion-content>
 

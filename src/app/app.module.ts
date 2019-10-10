@@ -15,7 +15,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatListModule, MatRadioModule } from '@angular/material';
 import { InterestsListComponent } from './interests-list/interests-list.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -46,6 +46,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
         MatButtonModule,
         MatInputModule,
         IonicStorageModule.forRoot(),
+        FormsModule,
     ],
     providers: [
         StatusBar,
