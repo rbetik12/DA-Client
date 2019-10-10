@@ -26,7 +26,9 @@
         </ion-fab-button>
     </ion-fab>
 
-
+    <ion-item class="age-header">
+        Preferred age:
+    </ion-item>
     <ion-range (ionBlur)="showAge()" [(ngModel)]="prefAges" [value]="prefAges" class="age-slider" dualKnobs="true"
                max="99" min="18"
                pin>
