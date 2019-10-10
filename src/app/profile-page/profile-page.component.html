@@ -27,6 +27,13 @@
     </ion-fab>
 
     <div class="profile-info-header">
+        Name:
+    </div>
+    <ion-item class="name">
+        <ion-textarea [value]="userInfo.name"></ion-textarea>
+    </ion-item>
+
+    <div class="profile-info-header">
         Preferred age:
     </div>
     <ion-range (ionBlur)="showAge()" [(ngModel)]="prefAges" [value]="prefAges" class="age-slider" dualKnobs="true"
