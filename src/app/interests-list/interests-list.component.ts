@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatListOption } from '@angular/material';
 
 @Component({
@@ -9,6 +9,7 @@ import { MatListOption } from '@angular/material';
 export class InterestsListComponent {
     @Output() selected = new EventEmitter<MatListOption[]>();
     interestsCategories: string[] = ['Music', 'Food', 'Traveling', 'Culture', 'Books'];
+    @Input() selectedCategoriesList: string[] = [];
 
     onSelect(selected: MatListOption[]) {
         this.selected.emit(selected);

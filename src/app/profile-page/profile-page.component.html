@@ -14,7 +14,8 @@
         <ion-slide (click)="onPhotoClick($event.target)" *ngFor="let photo of photoService.photos; let i = index"
                    class="slide">
             <div *ngIf="photo">
-                <img [ngStyle]="{'height': '15em', 'width': width}" [src]="photo.data">
+                <img [ngStyle]="{'height': '15em', 'width': width}" [src]="photo.data"
+                     alt="Profile photo didn't load :(">
                 <mat-checkbox (change)="onCheckBoxClick($event, i)" *ngIf="deletePhoto" [checked]="false"
                               class="delete-checkbox"></mat-checkbox>
             </div>
@@ -58,6 +59,7 @@
         <mat-radio-button [checked]="userInfo.gender === 'F'" class="gender" value="F">Woman</mat-radio-button>
     </mat-radio-group>
 
-    <app-interests-list (selected)="onInterestSelect($event)" class="interests-list"></app-interests-list>
+    <app-interests-list (selected)="onInterestSelect($event)" [selectedCategoriesList]="userInfo.interests"
+                        class="interests-list"></app-interests-list>
 </ion-content>
 

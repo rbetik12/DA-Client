@@ -1,5 +1,6 @@
 <mat-selection-list #categories (selectionChange)="onSelect(categories.selectedOptions.selected)">
-    <mat-list-option *ngFor="let category of interestsCategories" [value]="category">
+    <mat-list-option *ngFor="let category of interestsCategories" [selected]="selectedCategoriesList.includes(category)"
+                     [value]="category">
         {{category}}
     </mat-list-option>
 </mat-selection-list>
