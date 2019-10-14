@@ -58,6 +58,6 @@
         <mat-radio-button [checked]="userInfo.gender === 'F'" class="gender" value="F">Woman</mat-radio-button>
     </mat-radio-group>
 
-    <app-interests-list class="interests-list"></app-interests-list>
+    <app-interests-list (selected)="onInterestSelect($event)" class="interests-list"></app-interests-list>
 </ion-content>
 

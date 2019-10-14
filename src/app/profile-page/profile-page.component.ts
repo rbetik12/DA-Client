@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { PhotoService } from '../services/photo.service';
 import { User } from '../register-page/register-page.component';
+import { MatListOption } from '@angular/material';
 
 export class DelPhotoIndex {
     [index: number]: number;
@@ -42,6 +43,7 @@ export class ProfilePageComponent implements OnInit {
 
     showAge() {
         console.log(this.prefAges);
+        console.log(this.userInfo.interests);
     }
 
     logout() {
@@ -87,5 +89,16 @@ export class ProfilePageComponent implements OnInit {
 
     private clearIndexesArray() {
         this.delPhotosIndexes = {};
+    }
+
+    onInterestSelect(selectedOptions: MatListOption[]) {
+        this.userInfo.interests = [];
+        for (const category of selectedOptions) {
+            this.userInfo.interests.push(category.value);
+        }
+    }
+
+    private setSelectedInterests() {
+
     }
 }
