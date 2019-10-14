@@ -3,10 +3,9 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-    {path: '', component: ProfilePageComponent, canActivate: [AuthGuard]},
+    {path: '', component: ProfilePageComponent},
     {path: 'login', component: LoginPageComponent},
     {path: 'register', component: RegisterPageComponent}
 ];

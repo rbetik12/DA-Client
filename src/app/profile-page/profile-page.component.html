@@ -50,6 +50,14 @@
         <ion-textarea [value]="userInfo.about"></ion-textarea>
     </ion-item>
 
+    <div class="profile-info-header">
+        Preferred gender:
+    </div>
+    <mat-radio-group [(ngModel)]="userInfo.gender" aria-label="Select your gender" class="gender-select" name="gender">
+        <mat-radio-button [checked]="userInfo.gender === 'M'" class="gender" value="M">Man</mat-radio-button>
+        <mat-radio-button [checked]="userInfo.gender === 'F'" class="gender" value="F">Woman</mat-radio-button>
+    </mat-radio-group>
+
     <app-interests-list class="interests-list"></app-interests-list>
 </ion-content>
 
