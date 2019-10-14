@@ -21,6 +21,8 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './services/auth.guard';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ChatPageComponent } from './chat-page/chat-page.component';
+import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +31,9 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
         InterestsListComponent,
         RegisterPageComponent,
         TopBarComponent,
-        ProfilePageComponent
+        ProfilePageComponent,
+        ChatPageComponent,
+        BottomBarComponent
     ],
     entryComponents: [],
     imports: [
