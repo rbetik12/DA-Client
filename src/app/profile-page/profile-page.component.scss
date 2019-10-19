@@ -1,5 +1,78 @@
 button {
-  margin-top: 5em;
   background-color: #673ab7;
   color: white;
+}
+
+.slide {
+  margin-bottom: 2em;
+}
+
+.logout-button {
+  float: right;
+  padding: 0.5em;
+}
+
+.logout-button:active {
+  color: #673ab7;
+}
+
+.title {
+  float: left;
+  padding: 1em;
+}
+
+ion-slide {
+  position: relative;
+}
+
+.delete-checkbox {
+  float: right;
+  position: absolute;
+  right: 0.5em;
+  top: 0;
+  z-index: 1000;
+}
+
+.delete-buttons-container {
+  margin: 0 auto;
+  width: fit-content;
+  color: red;
+  padding: 1em;
+}
+
+.delete-buttons-container > ion-icon:last-child {
+  margin-left: 1em;
+}
+
+.delete-buttons-container > ion-icon:active:hover {
+  color: #673ab7;
+}
+
+.age-slider {
+  margin-left: 3em;
+  margin-right: 3em;
+}
+
+.age-value {
+  margin: 0 auto;
+  width: fit-content;
+  color: black;
+}
+
+.profile-info-header {
+  margin-left: 0.5em;
+  color: gray;
+}
+
+.name {
+  margin-bottom: 1em;
+}
+
+.gender-select {
+  margin-left: 0.5em;
+}
+
+.gender {
+  margin-right: 0.5em;
+  margin-top: 1em;
 }

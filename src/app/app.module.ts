@@ -5,6 +5,8 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,12 +15,14 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatListModule, MatRadioModule } from '@angular/material';
 import { InterestsListComponent } from './interests-list/interests-list.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './services/auth.guard';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ChatPageComponent } from './chat-page/chat-page.component';
+import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +31,9 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
         InterestsListComponent,
         RegisterPageComponent,
         TopBarComponent,
-        ProfilePageComponent
+        ProfilePageComponent,
+        ChatPageComponent,
+        BottomBarComponent
     ],
     entryComponents: [],
     imports: [
@@ -43,12 +49,15 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
         ReactiveFormsModule,
         MatButtonModule,
         MatInputModule,
+        IonicStorageModule.forRoot(),
+        FormsModule,
     ],
     providers: [
         StatusBar,
         SplashScreen,
         AuthService,
         AuthGuard,
+        Camera,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     exports: [

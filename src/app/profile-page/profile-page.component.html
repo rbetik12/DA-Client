@@ -1,5 +1,67 @@
-<app-top-bar [title]="title"></app-top-bar>
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="title">Profile</ion-title>
+        <ion-icon (click)="logout()" class="logout-button" name="exit" size="large"></ion-icon>
+        <div *ngIf="deletePhoto" class="delete-buttons-container">
+            <ion-icon (click)="deletePhoto=!deletePhoto; clearIndexesArray()" name="close" size="large"></ion-icon>
+            <ion-icon (click)="deletePhotos()" name="checkmark" size="large"></ion-icon>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
 <ion-content>
-    <button (click)="logout()" mat-flat-button>Logout</button>
+    <ion-slides [options]="{'slidesPerView': '2'}" pager="true">
+        <ion-slide (click)="onPhotoClick($event.target)" *ngFor="let photo of photoService.photos; let i = index"
+                   class="slide">
+            <div *ngIf="photo">
+                <img [ngStyle]="{'height': '15em', 'width': width}" [src]="photo.data"
+                     alt="Profile photo didn't load :(">
+                <mat-checkbox (change)="onCheckBoxClick($event, i)" *ngIf="deletePhoto" [checked]="false"
+                              class="delete-checkbox"></mat-checkbox>
+            </div>
+        </ion-slide>
+    </ion-slides>
+    <ion-fab horizontal="end" slot="fixed" vertical="bottom">
+        <ion-fab-button (click)="photoService.takePicture()">
+            <ion-icon name="camera"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <div class="profile-info-header">
+        Name:
+    </div>
+    <ion-item class="name">
+        <ion-textarea [value]="userInfo.name"></ion-textarea>
+    </ion-item>
+
+    <div class="profile-info-header">
+        Preferred age:
+    </div>
+    <ion-range (ionBlur)="showAge()" [(ngModel)]="prefAges" [value]="prefAges" class="age-slider" dualKnobs="true"
+               max="99" min="18"
+               pin>
+    </ion-range>
+    <div class="age-value">
+        {{prefAges.lower}}-{{prefAges.upper}}
+    </div>
+    <div class="profile-info-header">
+        About you:
+    </div>
+    <ion-item class="about-me">
+        <ion-textarea [value]="userInfo.about"></ion-textarea>
+    </ion-item>
+
+    <div class="profile-info-header">
+        Preferred gender:
+    </div>
+    <mat-radio-group [(ngModel)]="userInfo.gender" aria-label="Select your gender" class="gender-select" name="gender">
+        <mat-radio-button [checked]="userInfo.gender === 'M'" class="gender" value="M">Man</mat-radio-button>
+        <mat-radio-button [checked]="userInfo.gender === 'F'" class="gender" value="F">Woman</mat-radio-button>
+    </mat-radio-group>
+
+    <app-interests-list (selected)="onInterestSelect($event)" [selectedCategoriesList]="userInfo.interests"
+                        class="interests-list"></app-interests-list>
 </ion-content>
+
+<app-bottom-bar></app-bottom-bar>
 
