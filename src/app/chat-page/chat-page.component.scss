@@ -2,4 +2,37 @@
   padding: 1em;
 }
 
+.message-wrapper {
+  margin: 1em 0;
+}
+
+.my-message-wrapper {
+  vertical-align: center;
+  text-align: right;
+}
+
+.others-message-wrapper {
+  text-align: left;
+}
+
+.message-title {
+  font-weight: bold;
+}
+
+.message-content {
+  display: inline-block;
+  color: white;
+  padding: 1em;
+  width: 100%;
+}
+
+.my-message-content {
+  background-color: #5722b5;
+}
+
+.others-message-content {
+  background-color: #673ab7;
+}
+
+
 

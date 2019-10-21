@@ -4,5 +4,19 @@
     </ion-toolbar>
 </ion-header>
 
-
+<ion-content>
+    <div *ngFor="let message of messages"
+         [ngClass]="message.sender === mSender ? 'my-message-wrapper' : 'others-message-wrapper'"
+         class="message-wrapper">
+        <div [ngClass]="message.sender === mSender ? 'my-message-content' : 'others-message-content'"
+             class="message-content">
+            <div class="message-title">
+                {{message.sender}}
+            </div>
+            <div class="message-text">
+                {{message.text}}
+            </div>
+        </div>
+    </div>
+</ion-content>
 <app-bottom-bar></app-bottom-bar>
