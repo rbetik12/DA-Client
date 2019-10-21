@@ -33,7 +33,7 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
         TopBarComponent,
         ProfilePageComponent,
         ChatPageComponent,
-        BottomBarComponent
+        BottomBarComponent,
     ],
     entryComponents: [],
     imports: [
