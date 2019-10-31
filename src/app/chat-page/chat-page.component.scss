@@ -34,5 +34,35 @@
   background-color: #673ab7;
 }
 
+.message-area {
+  vertical-align: middle;
+}
+
+.input {
+  vertical-align: middle;
+  display: inline-block;
+  margin-left: 2em;
+  height: 100%;
+  width: 80%;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.input:focus {
+  outline: none;
+  border: none;
+}
+
+.send-button {
+  display: inline-block;
+  margin-left: 0.5em;
+  color: #7e57ff;
+}
+
+.send-button:active {
+  color: black;
+}
+
 
 
