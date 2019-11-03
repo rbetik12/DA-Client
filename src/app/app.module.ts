@@ -23,6 +23,10 @@ import { AuthGuard } from './services/auth.guard';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { Endpoints } from './endpoints';
+
+const config: SocketIoConfig = {url: Endpoints.globalChat, options: {}};
 
 @NgModule({
     declarations: [
@@ -51,6 +55,7 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
         MatInputModule,
         IonicStorageModule.forRoot(),
         FormsModule,
+        SocketIoModule.forRoot(config)
     ],
     providers: [
         StatusBar,

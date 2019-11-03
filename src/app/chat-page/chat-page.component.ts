@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ChatService } from '../services/chat.service';
 
 export interface MessageModel {
+    id: number;
     sender: string;
     text: string;
 }
@@ -10,67 +12,31 @@ export interface MessageModel {
     templateUrl: './chat-page.component.html',
     styleUrls: ['./chat-page.component.scss'],
 })
-export class ChatPageComponent {
+export class ChatPageComponent implements OnInit {
 
+    id: number;
     mMessage = '';
     mSender = 'Vitaliy';
-    messages: MessageModel[] = [
-        {
-            sender: 'Vitaliy',
-            text: 'Plasmator fatalis abactor est.Albus adelphis grauiter promissios urbs est.'
-        },
-        {
-            sender: 'Kek',
-            text: 'Cum acipenser messis, omnes fortises experientia velox, regius pulchritudinees.Aonidess trabem, tanquam albus.'
-        },
-        {
-            sender: 'Vitaliy',
-            text: 'Pol, ionicis tormento!Pol, a bene particula, omnia!'
-        },
-        {
-            sender: 'Vitaliy',
-            text: 'Plasmator fatalis abactor est.Albus adelphis grauiter promissios urbs est.'
-        },
-        {
-            sender: 'Kek',
-            text: 'Cum acipenser messis, omnes fortises experientia velox, regius pulchritudinees.Aonidess trabem, tanquam albus.'
-        },
-        {
-            sender: 'Vitaliy',
-            text: 'Pol, ionicis tormento!Pol, a bene particula, omnia!'
-        },
-        {
-            sender: 'Vitaliy',
-            text: 'Plasmator fatalis abactor est.Albus adelphis grauiter promissios urbs est.'
-        },
-        {
-            sender: 'Kek',
-            text: 'Cum acipenser messis, omnes fortises experientia velox, regius pulchritudinees.Aonidess trabem, tanquam albus.'
-        },
-        {
-            sender: 'Vitaliy',
-            text: 'Pol, ionicis tormento!Pol, a bene particula, omnia!'
-        },
-        {
-            sender: 'Vitaliy',
-            text: 'Plasmator fatalis abactor est.Albus adelphis grauiter promissios urbs est.'
-        },
-        {
-            sender: 'Kek',
-            text: 'Cum acipenser messis, omnes fortises experientia velox, regius pulchritudinees.Aonidess trabem, tanquam albus.'
-        },
-        {
-            sender: 'Vitaliy',
-            text: 'Pol, ionicis tormento!Pol, a bene particula, omnia!'
-        },
-    ];
+    messages: MessageModel[] = [];
 
-    constructor() {
+    constructor(private chatService: ChatService) {
+    }
+
+    ngOnInit() {
+        this.id = Math.random() * (1000);
+        this.chatService.listen('join').subscribe((messages: MessageModel[]) => {
+            this.messages = messages;
+        });
+        this.chatService.listen('newMessage').subscribe((message: MessageModel) => {
+            console.log('here');
+            this.messages.push(message);
+        });
     }
 
     sendMessage() {
-        console.log(this.mMessage);
-        this.messages.push({
+        console.table(this.mMessage);
+        this.chatService.emit('newMessage', {
+            id: this.id,
             sender: this.mSender,
             text: this.mMessage
         });
