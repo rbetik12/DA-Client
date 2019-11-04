@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ionic": "ionic serve",
-    "android": "ionic cordova emulate android -l",
+    "android": "ionic cordova emulate android -l -device Pixel_2_API_29",
     "android-build": "ionic cordova build android"
   },
   "private": true,

@@ -28,14 +28,12 @@ export class ChatPageComponent implements OnInit {
             this.messages = messages;
         });
         this.chatService.listen('newMessage').subscribe((message: MessageModel) => {
-            console.log('here');
             this.messages.push(message);
         });
         this.chatService.emit('join', this.id);
     }
 
     sendMessage() {
-        console.table(this.mMessage);
         this.chatService.emit('newMessage', {
             id: this.id,
             sender: this.mSender,
