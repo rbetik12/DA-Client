@@ -21,6 +21,8 @@
 </ion-content>
 <div class="message-area">
     <textarea [(ngModel)]="mMessage" class="input" rows="1"></textarea>
-    <ion-icon (click)="sendMessage()" class="send-button" name="send" size="large"></ion-icon>
+    <div class="send-button-container">
+        <ion-icon (click)="sendMessage()" class="send-button" name="send" size="large"></ion-icon>
+    </div>
 </div>
 <app-bottom-bar></app-bottom-bar>
