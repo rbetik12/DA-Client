@@ -31,6 +31,7 @@ export class ChatPageComponent implements OnInit {
             console.log('here');
             this.messages.push(message);
         });
+        this.chatService.emit('join', this.id);
     }
 
     sendMessage() {
