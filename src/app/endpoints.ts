@@ -5,4 +5,5 @@ export class Endpoints {
 
     public static login = Endpoints.address + '/api/login';
     public static register = Endpoints.address + '/api/register';
+    public static globalChat = Endpoints.ip + ':5000';
 }

@@ -3,8 +3,26 @@
         <ion-title class="title">Chat</ion-title>
     </ion-toolbar>
 </ion-header>
-<p>
-    chat-page works!
-</p>
 
+<ion-content>
+    <div *ngFor="let message of messages"
+         [ngClass]="message.sender === mSender ? 'my-message-wrapper' : 'others-message-wrapper'"
+         class="message-wrapper">
+        <div [ngClass]="message.sender === mSender ? 'my-message-content' : 'others-message-content'"
+             class="message-content">
+            <div class="message-title">
+                {{message.sender}}
+            </div>
+            <div class="message-text">
+                {{message.text}}
+            </div>
+        </div>
+    </div>
+</ion-content>
+<div class="message-area">
+    <textarea [(ngModel)]="mMessage" class="input" rows="1"></textarea>
+    <div class="send-button-container">
+        <ion-icon (click)="sendMessage()" class="send-button" name="send" size="large"></ion-icon>
+    </div>
+</div>
 <app-bottom-bar></app-bottom-bar>

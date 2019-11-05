@@ -31,9 +31,9 @@ export class ProfilePageComponent implements OnInit {
     };
 
     constructor(private auth: AuthService,
-                private router: Router,
+                public router: Router,
                 private platform: Platform,
-                private photoService: PhotoService) {
+                public photoService: PhotoService) {
     }
 
     ngOnInit() {
@@ -87,7 +87,7 @@ export class ProfilePageComponent implements OnInit {
         this.photoService.updateStorage();
     }
 
-    private clearIndexesArray() {
+    clearIndexesArray() {
         this.delPhotosIndexes = {};
     }
 
