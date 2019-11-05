@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { validators } from '../register-page/register-page.component';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 export interface LoginInfo {
     email: string;

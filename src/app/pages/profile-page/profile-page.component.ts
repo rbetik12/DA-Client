@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
-import { PhotoService } from '../services/photo.service';
+import { PhotoService } from '../../services/photo.service';
 import { User } from '../register-page/register-page.component';
 import { MatListOption } from '@angular/material';
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatListOption } from '@angular/material';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 export interface User {
