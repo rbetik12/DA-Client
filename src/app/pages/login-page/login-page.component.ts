@@ -20,7 +20,7 @@ export class LoginPageComponent {
     constructor(private auth: AuthService, private router: Router) {
     }
 
-    title = 'AppName';
+    title = 'ReadR';
     error = false;
 
     loginForm = new FormGroup({
