@@ -64,4 +64,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         this.newMessageSub.unsubscribe();
         this.connectionErrorSub.unsubscribe();
     }
+
+    openProfile(userID: number) {
+        this.router.navigateByUrl('/profile/' + userID);
+    }
 }

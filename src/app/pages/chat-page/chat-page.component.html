@@ -7,7 +7,7 @@
 <ion-content>
     <div *ngFor="let message of messages"
          [ngClass]="message.sender === mSender ? 'my-message-wrapper' : 'others-message-wrapper'"
-         class="message-wrapper">
+         (click)="openProfile(message.id)" class="message-wrapper">
         <div [ngClass]="message.sender === mSender ? 'my-message-content' : 'others-message-content'"
              class="message-content">
             <div class="message-title">
