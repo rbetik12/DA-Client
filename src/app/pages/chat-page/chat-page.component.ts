@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ChatService } from '../services/chat.service';
+import { ChatService } from '../../services/chat.service';
 import { Subscription } from 'rxjs';
+import { AlertErrorService } from '../../services/alert-error.service';
+import { Router } from '@angular/router';
 
 export interface MessageModel {
     id: number;
@@ -21,8 +23,9 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     messages: MessageModel[] = [];
     private joinSub: Subscription;
     private newMessageSub: Subscription;
+    private connectionErrorSub: Subscription;
 
-    constructor(private chatService: ChatService) {
+    constructor(private chatService: ChatService, private alertService: AlertErrorService, private router: Router) {
     }
 
     ngOnInit() {
@@ -35,6 +38,14 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         });
         this.newMessageSub = this.chatService.listen('newMessage').subscribe((message: MessageModel) => {
             this.messages.push(message);
+        });
+        this.connectionErrorSub = this.chatService.listen('connect_error').subscribe(() => {
+            console.log('error');
+            this.alertService.createHandledOkErrorAlert('Server connection error',
+                'Server might be down. You will be navigated to main screen', () => {
+                    this.router.navigateByUrl('');
+                });
+            this.connectionErrorSub.unsubscribe();
         });
         this.chatService.emit('join', this.id);
     }
@@ -51,5 +62,6 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         console.log('Destroy event');
         this.joinSub.unsubscribe();
         this.newMessageSub.unsubscribe();
+        this.connectionErrorSub.unsubscribe();
     }
 }
