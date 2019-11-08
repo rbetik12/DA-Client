@@ -14,6 +14,9 @@
             </div>
         </ion-slide>
     </ion-slides>
+    <ion-button>
+        <ion-icon (click)="likeUser()" name="heart" size="large"></ion-icon>
+    </ion-button>
     <ion-text>{{user.about}}</ion-text>
     <ion-text>Age: {{user.age}}</ion-text>
     <ion-text>{{user.gender}}</ion-text>

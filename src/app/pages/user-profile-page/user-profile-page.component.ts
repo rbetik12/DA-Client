@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./user-profile-page.component.scss'],
 })
 export class UserProfilePageComponent implements OnInit {
-
+    id: number;
     user: User = {
         name: 'kek',
         email: 'lol@gmail.com',
@@ -27,7 +27,10 @@ export class UserProfilePageComponent implements OnInit {
 
     ngOnInit() {
         this.width = this.platform.width();
-        console.log(this.activatedRoute.snapshot.params.id);
+        this.id = this.activatedRoute.snapshot.params.id;
     }
 
+    likeUser() {
+        console.log('You like that user with ID ' + this.id);
+    }
 }
