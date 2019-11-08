@@ -12,10 +12,10 @@ export class DelPhotoIndex {
 
 @Component({
     selector: 'app-profile-page',
-    templateUrl: './profile-page.component.html',
-    styleUrls: ['./profile-page.component.scss'],
+    templateUrl: './my-profile-page.component.html',
+    styleUrls: ['./my-profile-page.component.scss'],
 })
-export class ProfilePageComponent implements OnInit {
+export class MyProfilePageComponent implements OnInit {
 
     width: number;
     deletePhoto = false;

@@ -20,7 +20,7 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './services/auth.guard';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { MyProfilePageComponent } from './pages/my-profile-page/my-profile-page.component';
 import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
@@ -35,7 +35,7 @@ const config: SocketIoConfig = {url: Endpoints.globalChat, options: {}};
         InterestsListComponent,
         RegisterPageComponent,
         TopBarComponent,
-        ProfilePageComponent,
+        MyProfilePageComponent,
         ChatPageComponent,
         BottomBarComponent,
     ],
