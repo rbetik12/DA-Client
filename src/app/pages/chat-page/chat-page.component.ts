@@ -8,6 +8,7 @@ export interface MessageModel {
     id: number;
     sender: string;
     text: string;
+    liked?: boolean;
 }
 
 @Component({
@@ -35,6 +36,11 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             console.log('Join event');
             console.table(messages);
             this.messages = messages;
+            this.messages.push({
+                id: 1,
+                sender: 'kek',
+                text: 'lol'
+            });
         });
         this.newMessageSub = this.chatService.listen('newMessage').subscribe((message: MessageModel) => {
             this.messages.push(message);
@@ -67,5 +73,14 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     openProfile(userID: number) {
         this.router.navigateByUrl('/profile/' + userID);
+    }
+
+    likeMessage(likedMessage: MessageModel) {
+        console.log('Liked');
+        for (const message of this.messages) {
+            if (message.text === likedMessage.text) {
+                message.liked = message.liked ? !message.liked : true;
+            }
+        }
     }
 }

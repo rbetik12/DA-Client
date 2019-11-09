@@ -7,9 +7,9 @@
 <ion-content>
     <div *ngFor="let message of messages"
          [ngClass]="message.sender === mSender ? 'my-message-wrapper' : 'others-message-wrapper'"
-         (click)="openProfile(message.id)" class="message-wrapper">
+         class="message-wrapper">
         <div [ngClass]="message.sender === mSender ? 'my-message-content' : 'others-message-content'"
-             class="message-content">
+             (click)="openProfile(message.id)" class="message-content">
             <div class="message-title">
                 {{message.sender}}
             </div>
@@ -17,6 +17,8 @@
                 {{message.text}}
             </div>
         </div>
+        <ion-icon (click)="likeMessage(message)" *ngIf="message.sender !== mSender"
+                  [name]="message.liked ? 'heart' : 'heart-empty'" class="like-button" size="large"></ion-icon>
     </div>
 </ion-content>
 <div class="message-area">
