@@ -51,4 +51,12 @@ export class AuthService {
             return new Date().getTime() < Number.parseInt(expiresAt, 10);
         }
     }
+
+    getCredentials(): User {
+        return JSON.parse(localStorage.getItem('creds'));
+    }
+
+    private setCredentials(credentials: User) {
+        localStorage.setItem('creds', JSON.stringify(credentials));
+    }
 }

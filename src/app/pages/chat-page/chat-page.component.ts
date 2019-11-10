@@ -36,11 +36,6 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             console.log('Join event');
             console.table(messages);
             this.messages = messages;
-            this.messages.push({
-                id: 1,
-                sender: 'kek',
-                text: 'lol'
-            });
         });
         this.newMessageSub = this.chatService.listen('newMessage').subscribe((message: MessageModel) => {
             this.messages.push(message);

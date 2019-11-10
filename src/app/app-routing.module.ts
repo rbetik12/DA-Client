@@ -5,13 +5,14 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { MyProfilePageComponent } from './pages/my-profile-page/my-profile-page.component';
 import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 import { UserProfilePageComponent } from './pages/user-profile-page/user-profile-page.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-    {path: '', component: MyProfilePageComponent},
+    {path: '', component: MyProfilePageComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginPageComponent},
     {path: 'register', component: RegisterPageComponent},
-    {path: 'chat', component: ChatPageComponent},
-    {path: 'profile/:id', component: UserProfilePageComponent}
+    {path: 'chat', component: ChatPageComponent, canActivate: [AuthGuard]},
+    {path: 'profile/:id', component: UserProfilePageComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
