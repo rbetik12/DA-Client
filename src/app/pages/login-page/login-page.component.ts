@@ -4,11 +4,7 @@ import { validators } from '../register-page/register-page.component';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
-
-export interface LoginInfo {
-    email: string;
-    password: string;
-}
+import { LoginInfo } from '../../models/logininfo.model';
 
 @Component({
     selector: 'app-login-page',

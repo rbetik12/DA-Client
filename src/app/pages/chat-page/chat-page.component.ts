@@ -3,13 +3,7 @@ import { ChatService } from '../../services/chat.service';
 import { Subscription } from 'rxjs';
 import { AlertErrorService } from '../../services/alert-error.service';
 import { Router } from '@angular/router';
-
-export interface MessageModel {
-    id: number;
-    sender: string;
-    text: string;
-    liked?: boolean;
-}
+import { MessageModel } from '../../models/message.model';
 
 @Component({
     selector: 'app-chat-page',

@@ -3,8 +3,9 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { PhotoService } from '../../services/photo.service';
-import { User } from '../register-page/register-page.component';
+
 import { MatListOption } from '@angular/material';
+import { User } from '../../models/user.interface';
 
 export class DelPhotoIndex {
     [index: number]: number;
@@ -22,6 +23,7 @@ export class MyProfilePageComponent implements OnInit {
     prefAges = {lower: 18, upper: 25};
     delPhotosIndexes: DelPhotoIndex = {};
     userInfo: User = {
+        _id: null,
         name: 'Vitaliy',
         about: 'Kek lofkmoewmf',
         age: 19,

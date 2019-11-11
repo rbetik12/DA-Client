@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Storage } from '@ionic/storage';
+import { Photo } from '../models/photo.model';
 
-export interface Photo {
-    data: any;
-}
 
 @Injectable({
     providedIn: 'root'

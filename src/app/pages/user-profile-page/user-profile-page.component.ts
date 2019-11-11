@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../register-page/register-page.component';
 import { Platform } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { User } from '../../models/user.interface';
 
 @Component({
     selector: 'app-user-profile-page',
@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class UserProfilePageComponent implements OnInit {
     id: number;
     user: User = {
+        _id: null,
         name: 'kek',
         email: 'lol@gmail.com',
         gender: 'M',

@@ -3,18 +3,7 @@ import { MatListOption } from '@angular/material';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-
-export interface User {
-    name: string;
-    email: string;
-    gender: string;
-    age: number;
-    about: string;
-    interests: string[];
-
-    [key: string]: any;
-}
-
+import { User } from '../../models/user.interface';
 
 export const validators = {
     email: Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]'
@@ -66,6 +55,7 @@ export class RegisterPageComponent {
     onSubmit() {
         const info = this.registrationForm.value as User;
         const user: User = {
+            _id: null,
             name: info.name,
             email: info.email,
             password: info.password,
