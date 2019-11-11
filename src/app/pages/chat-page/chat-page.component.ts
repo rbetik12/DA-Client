@@ -8,6 +8,7 @@ export interface MessageModel {
     id: number;
     sender: string;
     text: string;
+    liked?: boolean;
 }
 
 @Component({
@@ -63,5 +64,18 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         this.joinSub.unsubscribe();
         this.newMessageSub.unsubscribe();
         this.connectionErrorSub.unsubscribe();
+    }
+
+    openProfile(userID: number) {
+        this.router.navigateByUrl('/profile/' + userID);
+    }
+
+    likeMessage(likedMessage: MessageModel) {
+        console.log('Liked');
+        for (const message of this.messages) {
+            if (message.text === likedMessage.text) {
+                message.liked = message.liked ? !message.liked : true;
+            }
+        }
     }
 }
