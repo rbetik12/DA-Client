@@ -47,7 +47,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     sendMessage() {
         this.chatService.emit('newMessage', {
-            id: this.id,
+            userID: this.id,
             sender: this.mSender,
             text: this.mMessage
         });
