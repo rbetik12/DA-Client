@@ -5,13 +5,15 @@ import { map } from 'rxjs/operators';
 import { Endpoints } from '../endpoints';
 import { LoginInfo } from '../models/logininfo.model';
 import { User } from '../models/user.interface';
+import { UserService } from './user.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+                private userService: UserService) {
     }
 
     authorised(): boolean {
@@ -22,7 +24,7 @@ export class AuthService {
         return this.http.post<LoginInfo>(Endpoints.login, {loginInfo}).pipe(map(res => {
             console.log(res);
             this.setSession(res);
-            this.setCredentials(res);
+            this.userService.setCredentials(res);
         }));
     }
 
@@ -51,17 +53,5 @@ export class AuthService {
             const expiresAt = localStorage.getItem('expires_at');
             return new Date().getTime() < Number.parseInt(expiresAt, 10);
         }
-    }
-
-    getCredentials(): User {
-        return JSON.parse(localStorage.getItem('creds'));
-    }
-
-    updateCredentials(user: User) {
-        localStorage.setItem('creds', JSON.stringify(user));
-    }
-
-    private setCredentials(res) {
-        localStorage.setItem('creds', JSON.stringify(res.credentials));
     }
 }

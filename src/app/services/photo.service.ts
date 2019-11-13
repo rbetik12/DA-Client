@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Storage } from '@ionic/storage';
 import { Photo } from '../models/photo.model';
-import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 
 
 @Injectable({
@@ -12,7 +12,9 @@ export class PhotoService {
 
     public photos: Photo[];
 
-    constructor(private camera: Camera, private storage: Storage, private auth: AuthService) {
+    constructor(private camera: Camera,
+                private storage: Storage,
+                private userService: UserService) {
     }
 
     takePicture() {
@@ -49,8 +51,6 @@ export class PhotoService {
 
     updateStorage() {
         this.storage.set('photos', this.photos);
-        const currentUser = this.auth.getCredentials();
-        currentUser.images = this.photos;
         // this.auth.updateCredentials(currentUser);
     }
 }

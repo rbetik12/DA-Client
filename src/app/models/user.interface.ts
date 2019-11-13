@@ -1,5 +1,3 @@
-import { Photo } from './photo.model';
-
 export interface User {
     _id: string;
     name: string;
@@ -8,7 +6,6 @@ export interface User {
     age: number;
     about: string;
     interests: string[];
-    images?: Photo[];
 
     password?: string;
 

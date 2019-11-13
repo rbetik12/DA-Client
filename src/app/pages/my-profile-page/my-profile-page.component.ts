@@ -8,6 +8,7 @@ import { MatListOption } from '@angular/material';
 import { User } from '../../models/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Endpoints } from '../../endpoints';
+import { UserService } from '../../services/user.service';
 
 export class DelPhotoIndex {
     [index: number]: number;
@@ -29,11 +30,12 @@ export class MyProfilePageComponent implements OnInit {
                 public router: Router,
                 private platform: Platform,
                 public photoService: PhotoService,
-                private http: HttpClient) {
+                private http: HttpClient,
+                private userService: UserService) {
     }
 
     ngOnInit() {
-        this.userInfo = this.auth.getCredentials();
+        this.userInfo = this.userService.getCredentials();
         this.width = this.platform.width();
         this.photoService.loadSaved();
     }
@@ -99,7 +101,7 @@ export class MyProfilePageComponent implements OnInit {
     }
 
     private updateProfile(user: User) {
-        this.auth.updateCredentials(user);
+        this.userService.updateCredentials(user);
         this.http.post<User>(Endpoints.profile, {user}).subscribe(res => {
             console.log(res);
         });
