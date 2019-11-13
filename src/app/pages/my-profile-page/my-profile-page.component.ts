@@ -6,6 +6,8 @@ import { PhotoService } from '../../services/photo.service';
 
 import { MatListOption } from '@angular/material';
 import { User } from '../../models/user.interface';
+import { HttpClient } from '@angular/common/http';
+import { Endpoints } from '../../endpoints';
 
 export class DelPhotoIndex {
     [index: number]: number;
@@ -20,32 +22,20 @@ export class MyProfilePageComponent implements OnInit {
 
     width: number;
     deletePhoto = false;
-    prefAges = {lower: 18, upper: 25};
     delPhotosIndexes: DelPhotoIndex = {};
-    userInfo: User = {
-        _id: null,
-        name: 'Vitaliy',
-        about: 'Kek lofkmoewmf',
-        age: 19,
-        interests: ['Music'],
-        email: 'lol@gmail.com',
-        gender: 'M'
-    };
+    userInfo: User;
 
     constructor(private auth: AuthService,
                 public router: Router,
                 private platform: Platform,
-                public photoService: PhotoService) {
+                public photoService: PhotoService,
+                private http: HttpClient) {
     }
 
     ngOnInit() {
+        this.userInfo = this.auth.getCredentials();
         this.width = this.platform.width();
         this.photoService.loadSaved();
-    }
-
-    showAge() {
-        console.log(this.prefAges);
-        console.log(this.userInfo.interests);
     }
 
     logout() {
@@ -100,7 +90,18 @@ export class MyProfilePageComponent implements OnInit {
         }
     }
 
+    changeAboutMe() {
+        this.updateProfile(this.userInfo);
+    }
+
     private setSelectedInterests() {
 
+    }
+
+    private updateProfile(user: User) {
+        this.auth.updateCredentials(user);
+        this.http.post<User>(Endpoints.profile, {user}).subscribe(res => {
+            console.log(res);
+        });
     }
 }

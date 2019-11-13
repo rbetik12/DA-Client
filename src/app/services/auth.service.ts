@@ -22,6 +22,7 @@ export class AuthService {
         return this.http.post<LoginInfo>(Endpoints.login, {loginInfo}).pipe(map(res => {
             console.log(res);
             this.setSession(res);
+            this.setCredentials(res);
         }));
     }
 
@@ -56,7 +57,11 @@ export class AuthService {
         return JSON.parse(localStorage.getItem('creds'));
     }
 
-    private setCredentials(credentials: User) {
-        localStorage.setItem('creds', JSON.stringify(credentials));
+    updateCredentials(user: User) {
+        localStorage.setItem('creds', JSON.stringify(user));
+    }
+
+    private setCredentials(res) {
+        localStorage.setItem('creds', JSON.stringify(res.credentials));
     }
 }
