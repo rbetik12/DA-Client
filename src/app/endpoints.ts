@@ -1,5 +1,5 @@
 export class Endpoints {
-    private static ip = '192.168.1.105';
+    private static ip = '192.168.1.101';
     private static port = ':4000';
     private static address = 'http://' + Endpoints.ip + Endpoints.port;
 

@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AlertErrorService } from '../../services/alert-error.service';
 import { Router } from '@angular/router';
 import { MessageModel } from '../../models/message.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'app-chat-page',
@@ -12,24 +13,31 @@ import { MessageModel } from '../../models/message.model';
 })
 export class ChatPageComponent implements OnInit, OnDestroy {
 
-    id: number;
+    id = '';
     mMessage = '';
-    mSender = 'Vitaliy';
+    mSender = '';
     messages: MessageModel[] = [];
     private joinSub: Subscription;
     private newMessageSub: Subscription;
     private connectionErrorSub: Subscription;
 
-    constructor(private chatService: ChatService, private alertService: AlertErrorService, private router: Router) {
+    constructor(private chatService: ChatService,
+                private alertService: AlertErrorService,
+                private router: Router,
+                private userService: UserService) {
     }
 
     ngOnInit() {
         console.log('Init event');
-        this.id = Math.random() * (1000);
+        this.id = this.userService.getCredentials()._id;
+        this.mSender = this.userService.getCredentials().name;
         this.joinSub = this.chatService.listen('join').subscribe((messages: MessageModel[]) => {
             console.log('Join event');
             console.table(messages);
-            this.messages = messages;
+            const messagesArr: MessageModel[] = Object.values(messages);
+            for (const message of messagesArr) {
+                this.messages.push(message);
+            }
         });
         this.newMessageSub = this.chatService.listen('newMessage').subscribe((message: MessageModel) => {
             this.messages.push(message);
@@ -58,9 +66,13 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         this.joinSub.unsubscribe();
         this.newMessageSub.unsubscribe();
         this.connectionErrorSub.unsubscribe();
+        this.messages = [];
     }
 
-    openProfile(userID: number) {
+    openProfile(userID: string) {
+        if (userID === this.id) {
+            return;
+        }
         this.router.navigateByUrl('/profile/' + userID);
     }
 

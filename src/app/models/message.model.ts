@@ -1,6 +1,6 @@
 export interface MessageModel {
     _id: string;
-    userID: number;
+    userID: string;
     sender: string;
     text: string;
     liked?: boolean;
