@@ -5,6 +5,7 @@ import { AlertErrorService } from '../../services/alert-error.service';
 import { Router } from '@angular/router';
 import { MessageModel } from '../../models/message.model';
 import { UserService } from '../../services/user.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
     selector: 'app-chat-page',
@@ -24,10 +25,18 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     constructor(private chatService: ChatService,
                 private alertService: AlertErrorService,
                 private router: Router,
-                private userService: UserService) {
+                private userService: UserService,
+                private geolocation: Geolocation) {
     }
 
     ngOnInit() {
+        // this.geolocation.getCurrentPosition().then((resp) => {
+        //     this.alertService.createOkErrorAlert('Location', resp.coords.latitude.toString() + resp.coords.longitude.toString());
+        //     console.log(resp.coords.latitude);
+        //     console.log(resp.coords.longitude);
+        // }).catch((error) => {
+        //     console.log('Error getting location', error);
+        // });
         console.log('Init event');
         this.id = this.userService.getCredentials()._id;
         this.mSender = this.userService.getCredentials().name;

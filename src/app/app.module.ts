@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { IonicStorageModule } from '@ionic/storage';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -65,6 +66,7 @@ const config: SocketIoConfig = {url: Endpoints.globalChat, options: {}};
         AuthService,
         AuthGuard,
         Camera,
+        Geolocation,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     exports: [
