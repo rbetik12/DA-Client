@@ -63,11 +63,16 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     }
 
     sendMessage() {
-        this.chatService.emit('newMessage', {
-            userID: this.id,
-            sender: this.mSender,
-            text: this.mMessage
-        });
+        if (this.mMessage === '') {
+            this.alertService.createOkErrorAlert('Empty message', 'You cannot send empty messages');
+        } else {
+            this.chatService.emit('newMessage', {
+                userID: this.id,
+                sender: this.mSender,
+                text: this.mMessage
+            });
+            this.mMessage = '';
+        }
     }
 
     ngOnDestroy() {
