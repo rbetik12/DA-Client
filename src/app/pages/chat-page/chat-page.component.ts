@@ -70,14 +70,27 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         });
     }
 
+    openProfile(userID: string) {
+        if (userID === this.id) {
+            return;
+        }
+        this.router.navigateByUrl('/profile/' + userID);
+        console.log('opened profile with id ' + userID);
+    }
+
+    ngOnDestroy() {
+        console.log('Destroy event');
+        this.joinSub.unsubscribe();
+        this.newMessageSub.unsubscribe();
+        this.connectionErrorSub.unsubscribe();
+        this.messages = [];
+    }
+
     private setChatListeners() {
         this.joinSub = this.chatService.listen('join').subscribe((messages: MessageModel[]) => {
             console.log('Join event');
             console.table(messages);
-            this.messages = Object.values(messages).map((message) => {
-                message.text += ' ' + message.coefficient;
-                return message;
-            });
+            this.messages = Object.values(messages);
         });
         this.newMessageSub = this.chatService.listen('newMessage').subscribe((message: MessageModel) => {
             this.messages.push(message);
@@ -90,21 +103,6 @@ export class ChatPageComponent implements OnInit, OnDestroy {
                 });
             this.connectionErrorSub.unsubscribe();
         });
-    }
-
-    ngOnDestroy() {
-        console.log('Destroy event');
-        this.joinSub.unsubscribe();
-        this.newMessageSub.unsubscribe();
-        this.connectionErrorSub.unsubscribe();
-        this.messages = [];
-    }
-
-    openProfile(userID: string) {
-        if (userID === this.id) {
-            return;
-        }
-        this.router.navigateByUrl('/profile/' + userID);
     }
 
     likeMessage(likedMessage: MessageModel) {
