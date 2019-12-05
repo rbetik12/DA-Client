@@ -18,6 +18,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     mMessage = '';
     mSender = '';
     messages: MessageModel[] = [];
+    latitude = 0;
+    longitude = 0;
     private joinSub: Subscription;
     private newMessageSub: Subscription;
     private connectionErrorSub: Subscription;
@@ -30,35 +32,13 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        // this.geolocation.getCurrentPosition().then((resp) => {
-        //     this.alertService.createOkErrorAlert('Location', resp.coords.latitude.toString() + resp.coords.longitude.toString());
-        //     console.log(resp.coords.latitude);
-        //     console.log(resp.coords.longitude);
-        // }).catch((error) => {
-        //     console.log('Error getting location', error);
-        // });
         console.log('Init event');
+        this.initGeolocation();
+        this.setChatListeners();
+
         this.id = this.userService.getCredentials()._id;
         this.mSender = this.userService.getCredentials().name;
-        this.joinSub = this.chatService.listen('join').subscribe((messages: MessageModel[]) => {
-            console.log('Join event');
-            console.table(messages);
-            const messagesArr: MessageModel[] = Object.values(messages);
-            for (const message of messagesArr) {
-                this.messages.push(message);
-            }
-        });
-        this.newMessageSub = this.chatService.listen('newMessage').subscribe((message: MessageModel) => {
-            this.messages.push(message);
-        });
-        this.connectionErrorSub = this.chatService.listen('connect_error').subscribe(() => {
-            console.log('error');
-            this.alertService.createHandledOkErrorAlert('Server connection error',
-                'Server might be down. You will be navigated to main screen', () => {
-                    this.router.navigateByUrl('');
-                });
-            this.connectionErrorSub.unsubscribe();
-        });
+
         this.chatService.emit('join', this.id);
     }
 
@@ -69,10 +49,47 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             this.chatService.emit('newMessage', {
                 userID: this.id,
                 sender: this.mSender,
-                text: this.mMessage
+                text: this.mMessage,
+                latitude: this.latitude,
+                longitude: this.longitude,
             });
             this.mMessage = '';
         }
+    }
+
+    private initGeolocation() {
+        this.geolocation.getCurrentPosition().then((resp) => {
+            this.latitude = resp.coords.latitude;
+            this.longitude = resp.coords.longitude;
+        }).catch((error) => {
+            console.error(error);
+            this.alertService.createHandledOkErrorAlert('Geolocation Error', 'Error in getting your geolocation. ' +
+                'You will be navigated to main screen', () => {
+                this.router.navigateByUrl('');
+            });
+        });
+    }
+
+    private setChatListeners() {
+        this.joinSub = this.chatService.listen('join').subscribe((messages: MessageModel[]) => {
+            console.log('Join event');
+            console.table(messages);
+            this.messages = Object.values(messages).map((message) => {
+                message.text += ' ' + message.coefficient;
+                return message;
+            });
+        });
+        this.newMessageSub = this.chatService.listen('newMessage').subscribe((message: MessageModel) => {
+            this.messages.push(message);
+        });
+        this.connectionErrorSub = this.chatService.listen('connect_error').subscribe(() => {
+            console.log('error');
+            this.alertService.createHandledOkErrorAlert('Server connection error',
+                'Server might be down. You will be navigated to main screen.', () => {
+                    this.router.navigateByUrl('');
+                });
+            this.connectionErrorSub.unsubscribe();
+        });
     }
 
     ngOnDestroy() {

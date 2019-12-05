@@ -3,5 +3,8 @@ export interface MessageModel {
     userID: string;
     sender: string;
     text: string;
+    latitude: number;
+    longitude: number;
+    coefficient?: number;
     liked?: boolean;
 }

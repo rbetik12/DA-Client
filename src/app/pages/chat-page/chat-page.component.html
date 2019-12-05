@@ -14,7 +14,7 @@
             <div class="message-title">
                 {{message.sender}}
             </div>
-            <div class="message-text">
+            <div [ngStyle]="{'font-size': (message.coefficient * 3)+'px'}" class="message-text">
                 {{message.text}}
             </div>
         </div>
