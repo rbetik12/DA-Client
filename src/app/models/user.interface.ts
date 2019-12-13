@@ -6,6 +6,7 @@ export interface User {
     age: number;
     about: string;
     interests: string[];
+    likes?: string[];
 
     password?: string;
 

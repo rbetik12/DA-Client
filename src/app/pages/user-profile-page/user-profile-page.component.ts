@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../models/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Endpoints } from '../../endpoints';
+import { Like } from '../../models/like.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'app-user-profile-page',
@@ -11,7 +13,7 @@ import { Endpoints } from '../../endpoints';
     styleUrls: ['./user-profile-page.component.scss'],
 })
 export class UserProfilePageComponent implements OnInit {
-    id: number;
+    id = 0;
     user: User = {
         _id: null,
         name: null,
@@ -20,14 +22,15 @@ export class UserProfilePageComponent implements OnInit {
         gender: null,
         age: null,
         email: null,
-        photos: ['https://www.idyllwildarts.org/wp-content/uploads/2016/09/blank-profile-picture.jpg']
+        photos: ['https://www.idyllwildarts.org/wp-content/uploads/2016/09/blank-profile-picture.jpg'],
     };
     width: number;
 
     constructor(private platform: Platform,
                 private activatedRoute: ActivatedRoute,
                 private http: HttpClient,
-                private router: Router) {
+                private router: Router,
+                private userService: UserService) {
     }
 
     ngOnInit() {
@@ -40,7 +43,15 @@ export class UserProfilePageComponent implements OnInit {
     }
 
     likeUser() {
-        console.log('You like that user with ID ' + this.id);
+        console.log(this.id);
+        if (this.id !== 0) {
+            this.http.post<Like>(Endpoints.like, {
+                userId: this.userService.getCredentials()._id,
+                userWhoGetLiked: this.id
+            }, {observe: 'response'}).subscribe((res) => {
+                console.log(res);
+            });
+        }
     }
 
     toChat() {
