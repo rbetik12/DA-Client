@@ -90,6 +90,7 @@ export class MyProfilePageComponent implements OnInit {
         for (const category of selectedOptions) {
             this.userInfo.interests.push(category.value);
         }
+        this.updateProfile(this.userInfo);
     }
 
     changeAboutMe() {

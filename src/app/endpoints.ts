@@ -7,5 +7,5 @@ export class Endpoints {
     public static register = Endpoints.address + '/api/register';
     public static globalChat = Endpoints.ip + ':5000';
     public static profile = Endpoints.address + '/api/profile';
-    private static ip = '192.168.1.104';
+    private static ip = '192.168.1.100';
 }
