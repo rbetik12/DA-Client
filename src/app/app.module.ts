@@ -27,6 +27,7 @@ import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { Endpoints } from './endpoints';
 import { UserProfilePageComponent } from './pages/user-profile-page/user-profile-page.component';
+import { LikesPageComponent } from './pages/likes-page/likes-page.component';
 
 const config: SocketIoConfig = {url: Endpoints.globalChat, options: {}};
 
@@ -41,6 +42,7 @@ const config: SocketIoConfig = {url: Endpoints.globalChat, options: {}};
         ChatPageComponent,
         BottomBarComponent,
         UserProfilePageComponent,
+        LikesPageComponent
     ],
     entryComponents: [],
     imports: [
