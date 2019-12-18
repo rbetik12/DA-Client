@@ -35,6 +35,7 @@ export class AuthService {
     logout(): void {
         localStorage.setItem('session_token', null);
         localStorage.setItem('expires_at', null);
+        localStorage.setItem('creds', null);
     }
 
     getToken() {
