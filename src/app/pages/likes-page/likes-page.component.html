@@ -1,2 +1,37 @@
-<p>likes page works!</p>
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="title">Likes</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngFor="let user of usersWhoLiked">
+        <div class="profile-info-header">
+            Name:
+        </div>
+        <ion-item class="name">
+            <ion-textarea [value]="user.name" readonly></ion-textarea>
+        </ion-item>
+
+        <div class="profile-info-header">
+            About:
+        </div>
+        <ion-item class="about-me">
+            <ion-textarea [(ngModel)]="user.about" readonly=""></ion-textarea>
+        </ion-item>
+
+        <div class="profile-info-header">
+            Age:
+        </div>
+        <ion-item class="age">
+            <ion-textarea [(ngModel)]="user.age" readonly=""></ion-textarea>
+        </ion-item>
+        <div class="like-button">
+            <ion-button>
+                <ion-icon name="heart" size="large"></ion-icon>
+            </ion-button>
+        </div>
+    </div>
+</ion-content>
+
 <app-bottom-bar></app-bottom-bar>
