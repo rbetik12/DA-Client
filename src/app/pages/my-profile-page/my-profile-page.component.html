@@ -31,33 +31,15 @@
         Name:
     </div>
     <ion-item class="name">
-        <ion-textarea [value]="userInfo.name"></ion-textarea>
+        <ion-textarea [value]="userInfo.name" readonly></ion-textarea>
     </ion-item>
 
-    <div class="profile-info-header">
-        Preferred age:
-    </div>
-    <ion-range (ionBlur)="showAge()" [(ngModel)]="prefAges" [value]="prefAges" class="age-slider" dualKnobs="true"
-               max="99" min="18"
-               pin>
-    </ion-range>
-    <div class="age-value">
-        {{prefAges.lower}}-{{prefAges.upper}}
-    </div>
     <div class="profile-info-header">
         About you:
     </div>
     <ion-item class="about-me">
-        <ion-textarea [value]="userInfo.about"></ion-textarea>
+        <ion-textarea (ionBlur)="changeAboutMe()" [(ngModel)]="userInfo.about"></ion-textarea>
     </ion-item>
-
-    <div class="profile-info-header">
-        Preferred gender:
-    </div>
-    <mat-radio-group [(ngModel)]="userInfo.gender" aria-label="Select your gender" class="gender-select" name="gender">
-        <mat-radio-button [checked]="userInfo.gender === 'M'" class="gender" value="M">Man</mat-radio-button>
-        <mat-radio-button [checked]="userInfo.gender === 'F'" class="gender" value="F">Woman</mat-radio-button>
-    </mat-radio-group>
 
     <app-interests-list (selected)="onInterestSelect($event)" [selectedCategoriesList]="userInfo.interests"
                         class="interests-list"></app-interests-list>

@@ -1,6 +1,7 @@
 <ion-header>
     <ion-toolbar>
         <ion-title class="title">{{user.name}}</ion-title>
+        <ion-icon (click)="toChat()" class="back-button" name="arrow-back" size="large"></ion-icon>
     </ion-toolbar>
 </ion-header>
 
@@ -14,12 +15,16 @@
             </div>
         </ion-slide>
     </ion-slides>
-    <ion-button>
-        <ion-icon (click)="likeUser()" name="heart" size="large"></ion-icon>
+    <ion-button (click)="likeUser()">
+        <ion-icon name="heart" size="large"></ion-icon>
     </ion-button>
+    <br>
     <ion-text>{{user.about}}</ion-text>
+    <br>
     <ion-text>Age: {{user.age}}</ion-text>
+    <br>
     <ion-text>{{user.gender}}</ion-text>
+    <br>
     <ion-title>Interests:</ion-title>
     <ion-content>
         <ion-text *ngFor="let interest of user.interests">{{interest}}</ion-text>

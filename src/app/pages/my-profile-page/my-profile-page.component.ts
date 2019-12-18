@@ -3,8 +3,12 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { PhotoService } from '../../services/photo.service';
-import { User } from '../register-page/register-page.component';
+
 import { MatListOption } from '@angular/material';
+import { User } from '../../models/user.interface';
+import { HttpClient } from '@angular/common/http';
+import { Endpoints } from '../../endpoints';
+import { UserService } from '../../services/user.service';
 
 export class DelPhotoIndex {
     [index: number]: number;
@@ -19,31 +23,21 @@ export class MyProfilePageComponent implements OnInit {
 
     width: number;
     deletePhoto = false;
-    prefAges = {lower: 18, upper: 25};
     delPhotosIndexes: DelPhotoIndex = {};
-    userInfo: User = {
-        name: 'Vitaliy',
-        about: 'Kek lofkmoewmf',
-        age: 19,
-        interests: ['Music'],
-        email: 'lol@gmail.com',
-        gender: 'M'
-    };
+    userInfo: User;
 
     constructor(private auth: AuthService,
                 public router: Router,
                 private platform: Platform,
-                public photoService: PhotoService) {
+                public photoService: PhotoService,
+                private http: HttpClient,
+                private userService: UserService) {
     }
 
     ngOnInit() {
+        this.userInfo = this.userService.getCredentials();
         this.width = this.platform.width();
         this.photoService.loadSaved();
-    }
-
-    showAge() {
-        console.log(this.prefAges);
-        console.log(this.userInfo.interests);
     }
 
     logout() {
@@ -96,9 +90,21 @@ export class MyProfilePageComponent implements OnInit {
         for (const category of selectedOptions) {
             this.userInfo.interests.push(category.value);
         }
+        this.updateProfile(this.userInfo);
+    }
+
+    changeAboutMe() {
+        this.updateProfile(this.userInfo);
     }
 
     private setSelectedInterests() {
 
+    }
+
+    private updateProfile(user: User) {
+        this.userService.updateCredentials(user);
+        this.http.post<User>(Endpoints.profile, {user}).subscribe(res => {
+            console.log(res);
+        });
     }
 }
