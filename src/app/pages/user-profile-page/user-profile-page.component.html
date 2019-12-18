@@ -19,14 +19,17 @@
         <ion-icon name="heart" size="large"></ion-icon>
     </ion-button>
     <br>
-    <ion-text>{{user.about}}</ion-text>
+    <ion-title>About:</ion-title>
+    <ion-text class="text">{{user.about}}</ion-text>
     <br>
-    <ion-text>Age: {{user.age}}</ion-text>
+    <ion-title>Age:</ion-title>
+    <ion-text class="text">{{user.age}}</ion-text>
     <br>
-    <ion-text>{{user.gender}}</ion-text>
+    <ion-title>Gender:</ion-title>
+    <ion-text class="text">{{user.gender}}</ion-text>
     <br>
     <ion-title>Interests:</ion-title>
     <ion-content>
-        <ion-text *ngFor="let interest of user.interests">{{interest}}</ion-text>
+        <ion-text *ngFor="let interest of user.interests" class="text">{{interest}} <br></ion-text>
     </ion-content>
 </ion-content>
