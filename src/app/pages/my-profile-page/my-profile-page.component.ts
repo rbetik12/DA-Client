@@ -9,6 +9,7 @@ import { User } from '../../models/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Endpoints } from '../../endpoints';
 import { UserService } from '../../services/user.service';
+import { Photo } from '../../models/photo.model';
 
 export class DelPhotoIndex {
     [index: number]: number;
@@ -97,8 +98,8 @@ export class MyProfilePageComponent implements OnInit {
         this.updateProfile(this.userInfo);
     }
 
-    private setSelectedInterests() {
-
+    uploadPhoto() {
+        this.photoService.takePicture();
     }
 
     private updateProfile(user: User) {

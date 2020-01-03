@@ -9,4 +9,5 @@ export class Endpoints {
     public static profile = Endpoints.address + '/api/profile';
     public static like = Endpoints.address + '/api/like';
     public static userLikes = Endpoints.address + '/api/user_likes';
+    public static uploadPhoto = Endpoints.address + '/api/photo/upload';
 }

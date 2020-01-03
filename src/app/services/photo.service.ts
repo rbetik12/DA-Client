@@ -3,6 +3,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Storage } from '@ionic/storage';
 import { Photo } from '../models/photo.model';
 import { UserService } from './user.service';
+import { Endpoints } from '../endpoints';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -14,7 +16,8 @@ export class PhotoService {
 
     constructor(private camera: Camera,
                 private storage: Storage,
-                private userService: UserService) {
+                private userService: UserService,
+                private http: HttpClient) {
     }
 
     takePicture() {
@@ -33,6 +36,12 @@ export class PhotoService {
                 data: 'data:image/jpeg;base64,' + imageData
             });
             this.updateStorage();
+            this.http.post<Photo>(Endpoints.uploadPhoto, {
+                user_id: this.userService.getCredentials()._id,
+                data: this.photos[0]
+            }).subscribe(res => {
+                console.log(res);
+            });
         }, (err) => {
             // Handle error
             console.log('Camera issue: ' + err);
