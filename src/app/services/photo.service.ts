@@ -3,6 +3,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Storage } from '@ionic/storage';
 import { Photo } from '../models/photo.model';
 import { UserService } from './user.service';
+import { Endpoints } from '../endpoints';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -10,11 +12,12 @@ import { UserService } from './user.service';
 })
 export class PhotoService {
 
-    public photos: Photo[];
+    public photos: Photo[] = [{data: 'https://www.idyllwildarts.org/wp-content/uploads/2016/09/blank-profile-picture.jpg'}];
 
     constructor(private camera: Camera,
                 private storage: Storage,
-                private userService: UserService) {
+                private userService: UserService,
+                private http: HttpClient) {
     }
 
     takePicture() {
@@ -26,7 +29,7 @@ export class PhotoService {
         };
 
         this.camera.getPicture(options).then((imageData) => {
-            if (this.photos[0].data.match(/https:/g)) {
+            if (this.photos[0] && this.photos[0].data.match(/https:/g)) {
                 this.photos.pop();
             }
             this.photos.unshift({
@@ -40,9 +43,7 @@ export class PhotoService {
     }
 
     loadSaved() {
-        this.storage.get('photos').then((photos) => {
-            this.photos = photos ? photos : [{data: 'https://www.idyllwildarts.org/wp-content/uploads/2016/09/blank-profile-picture.jpg'}];
-        });
+        this.setUserPhotos();
     }
 
     setDefault() {
@@ -51,6 +52,22 @@ export class PhotoService {
 
     updateStorage() {
         this.storage.set('photos', this.photos);
-        // this.auth.updateCredentials(currentUser);
+        this.http.post<Photo>(Endpoints.uploadPhoto, {
+            user_id: this.userService.getCredentials()._id,
+            data: this.photos[0]
+        }).subscribe(res => {
+            console.log(res);
+        });
+    }
+
+    setUserPhotos() {
+        if (this.userService.getUserId()) {
+            this.http.get(Endpoints.getPhotos + '/' + this.userService.getCredentials()._id).subscribe(res => {
+                const photosFromServer: Photo[] = Object.values(res);
+                console.log(photosFromServer);
+                this.photos = photosFromServer ? photosFromServer :
+                    [{data: 'https://www.idyllwildarts.org/wp-content/uploads/2016/09/blank-profile-picture.jpg'}];
+            });
+        }
     }
 }

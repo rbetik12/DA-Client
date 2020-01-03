@@ -24,4 +24,8 @@ export class UserService {
         this.currentUser = res.credentials;
         localStorage.setItem('creds', JSON.stringify(res.credentials));
     }
+
+    getUserId() {
+        return JSON.parse(localStorage.getItem('creds'))._id;
+    }
 }
