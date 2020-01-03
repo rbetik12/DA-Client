@@ -38,7 +38,12 @@ export class MyProfilePageComponent implements OnInit {
     ngOnInit() {
         this.userInfo = this.userService.getCredentials();
         this.width = this.platform.width();
-        this.photoService.loadSaved();
+        console.log(this.userService.getCredentials()._id);
+        setTimeout(() => {
+            console.log('Loading photos');
+            this.photoService.loadSaved();
+        }, 1000);
+        console.log(this.photoService.photos);
     }
 
     logout() {

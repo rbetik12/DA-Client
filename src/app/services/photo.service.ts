@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PhotoService {
 
-    public photos: Photo[];
+    public photos: Photo[] = [{data: 'https://www.idyllwildarts.org/wp-content/uploads/2016/09/blank-profile-picture.jpg'}];
 
     constructor(private camera: Camera,
                 private storage: Storage,
@@ -29,19 +29,13 @@ export class PhotoService {
         };
 
         this.camera.getPicture(options).then((imageData) => {
-            if (this.photos[0].data.match(/https:/g)) {
+            if (this.photos[0] && this.photos[0].data.match(/https:/g)) {
                 this.photos.pop();
             }
             this.photos.unshift({
                 data: 'data:image/jpeg;base64,' + imageData
             });
             this.updateStorage();
-            this.http.post<Photo>(Endpoints.uploadPhoto, {
-                user_id: this.userService.getCredentials()._id,
-                data: this.photos[0]
-            }).subscribe(res => {
-                console.log(res);
-            });
         }, (err) => {
             // Handle error
             console.log('Camera issue: ' + err);
@@ -49,9 +43,7 @@ export class PhotoService {
     }
 
     loadSaved() {
-        this.storage.get('photos').then((photos) => {
-            this.photos = photos ? photos : [{data: 'https://www.idyllwildarts.org/wp-content/uploads/2016/09/blank-profile-picture.jpg'}];
-        });
+        this.setUserPhotos();
     }
 
     setDefault() {
@@ -60,6 +52,22 @@ export class PhotoService {
 
     updateStorage() {
         this.storage.set('photos', this.photos);
-        // this.auth.updateCredentials(currentUser);
+        this.http.post<Photo>(Endpoints.uploadPhoto, {
+            user_id: this.userService.getCredentials()._id,
+            data: this.photos[0]
+        }).subscribe(res => {
+            console.log(res);
+        });
+    }
+
+    setUserPhotos() {
+        if (this.userService.getUserId()) {
+            this.http.get(Endpoints.getPhotos + '/' + this.userService.getCredentials()._id).subscribe(res => {
+                const photosFromServer: Photo[] = Object.values(res);
+                console.log(photosFromServer);
+                this.photos = photosFromServer ? photosFromServer :
+                    [{data: 'https://www.idyllwildarts.org/wp-content/uploads/2016/09/blank-profile-picture.jpg'}];
+            });
+        }
     }
 }
