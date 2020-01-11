@@ -68,14 +68,17 @@ export class MyProfilePageComponent implements OnInit {
 
     deletePhotos() {
         console.log(Object.keys(this.delPhotosIndexes));
+        const deletionIDs: string[] = [];
         for (const index of Object.keys(this.delPhotosIndexes)) {
             if (this.delPhotosIndexes[index] !== -1) {
                 console.log(index);
                 console.log(this.delPhotosIndexes[index]);
+                deletionIDs.push(this.photoService.photos[index]._id);
                 delete this.photoService.photos[index];
                 console.log(this.photoService.photos[index]);
             }
         }
+        this.http.post(Endpoints.deletePhotos, {deletionIDs}).subscribe((res) => console.log(res));
         this.photoService.photos = this.photoService.photos.filter((el) => {
             return el != null;
         });
@@ -84,7 +87,6 @@ export class MyProfilePageComponent implements OnInit {
         if (this.photoService.photos.length === 0) {
             this.photoService.setDefault();
         }
-        this.photoService.updateStorage();
     }
 
     clearIndexesArray() {

@@ -1,5 +1,5 @@
 export class Endpoints {
-    private static ip = '192.168.1.100';
+    private static ip = '192.168.1.105';
     private static port = ':4000';
     private static address = 'http://' + Endpoints.ip + Endpoints.port;
 
@@ -11,4 +11,5 @@ export class Endpoints {
     public static userLikes = Endpoints.address + '/api/user_likes';
     public static uploadPhoto = Endpoints.address + '/api/photo/upload';
     public static getPhotos = Endpoints.address + '/api/photo/get';
+    public static deletePhotos = Endpoints.address + '/api/photo/delete';
 }
