@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-    <div *ngFor="let user of usersWhoLiked">
+    <div *ngFor="let user of usersWhoLiked; index as i">
         <div class="profile-info-header">
             Name:
         </div>
@@ -27,7 +27,7 @@
             <ion-textarea [(ngModel)]="user.age" readonly=""></ion-textarea>
         </ion-item>
         <div class="like-button">
-            <ion-button>
+            <ion-button (click)="likeUser(i)">
                 <ion-icon name="heart" size="large"></ion-icon>
             </ion-button>
         </div>
