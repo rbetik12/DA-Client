@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
-import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../../models/user.interface';
-import { HttpClient } from '@angular/common/http';
-import { Endpoints } from '../../endpoints';
-import { Like } from '../../models/like.model';
-import { UserService } from '../../services/user.service';
+import {Component, OnInit} from '@angular/core';
+import {Platform} from '@ionic/angular';
+import {ActivatedRoute, Router} from '@angular/router';
+import {User} from '../../models/user.interface';
+import {HttpClient} from '@angular/common/http';
+import {Endpoints} from '../../endpoints';
+import {Like} from '../../models/like.model';
+import {UserService} from '../../services/user.service';
+import {Photo} from "../../models/photo.model";
 
 @Component({
     selector: 'app-user-profile-page',
@@ -38,8 +39,21 @@ export class UserProfilePageComponent implements OnInit {
         this.id = this.activatedRoute.snapshot.params.id;
         this.http.get(Endpoints.profile + '/' + this.id).subscribe((res: User) => {
             this.user = res;
-            this.user.photos = ['https://www.idyllwildarts.org/wp-content/uploads/2016/09/blank-profile-picture.jpg'];
         });
+        console.log(Endpoints.getPhotos + '/' + this.id);
+        this.http.get(Endpoints.getPhotos + '/' + this.id).subscribe((resp) => {
+            const photosFromServer: Photo[] = Object.values(resp);
+            this.user.photos = [];
+            console.log(photosFromServer);
+            for (const photo of photosFromServer) {
+                console.log(photo);
+                this.user.photos.push(photo.data);
+            }
+        });
+        //     .subscribe((photos) => {
+        //     console.log(photos);
+        //     this.user.photos = Object.values(photos);
+        // });
     }
 
     likeUser() {
