@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Endpoints } from '../../endpoints';
-import { UserService } from '../../services/user.service';
-import { User } from '../../models/user.interface';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Endpoints} from '../../endpoints';
+import {UserService} from '../../services/user.service';
+import {User} from '../../models/user.interface';
+import {Like} from "../../models/like.model";
 
 @Component({
     selector: 'app-likes-page',
@@ -22,6 +23,15 @@ export class LikesPageComponent implements OnInit {
         this.http.get(Endpoints.userLikes + '/' + this.userService.getUserId()).subscribe(res => {
             this.usersWhoLiked = Object.values(res);
             console.log(this.usersWhoLiked);
+        });
+    }
+
+    likeUser(index: number) {
+        this.http.post<Like>(Endpoints.like, {
+            userId: this.userService.getCredentials()._id,
+            userWhoGetLiked: this.usersWhoLiked[index]._id,
+        }, {observe: 'response'}).subscribe((res) => {
+            console.log(res);
         });
     }
 
