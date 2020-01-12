@@ -39,6 +39,7 @@ export class MyProfilePageComponent implements OnInit {
         this.userInfo = this.userService.getCredentials();
         this.width = this.platform.width();
         console.log(this.userService.getCredentials()._id);
+        this.photoService.loadSaved();
         setTimeout(() => {
             console.log('Loading photos');
             this.photoService.loadSaved();
