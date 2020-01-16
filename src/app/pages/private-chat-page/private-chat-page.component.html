@@ -1,3 +1,7 @@
 <p>
-  chat with {{userId}}
+    chat with {{twimcId}}
 </p>
+<textarea [(ngModel)]="messageText" (blur)="sendMessage()"></textarea>
+<div *ngFor="let message of messages">
+    <div> {{message.text}}</div>
+</div>

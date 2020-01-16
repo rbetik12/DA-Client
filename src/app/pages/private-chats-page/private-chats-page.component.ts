@@ -17,7 +17,6 @@ export class PrivateChatsPageComponent implements OnInit {
 
     constructor(private http: HttpClient,
                 private userService: UserService,
-                private socketIO: Socket,
                 private router: Router) {
     }
 
