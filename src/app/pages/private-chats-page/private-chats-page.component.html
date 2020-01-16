@@ -1,4 +1,4 @@
 <div *ngFor="let user of mutualLikeUsers">
-    {{user._id}} <br>
+    <div (click)="openChat(user._id)">{{user._id}}</div> <br>
 </div>
 <app-bottom-bar></app-bottom-bar>

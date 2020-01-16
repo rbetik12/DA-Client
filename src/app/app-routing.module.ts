@@ -8,6 +8,7 @@ import {UserProfilePageComponent} from './pages/user-profile-page/user-profile-p
 import {AuthGuard} from './services/auth.guard';
 import {LikesPageComponent} from './pages/likes-page/likes-page.component';
 import {PrivateChatsPageComponent} from './pages/private-chats-page/private-chats-page.component';
+import {PrivateChatPageComponent} from './pages/private-chat-page/private-chat-page.component';
 
 const routes: Routes = [
     {path: '', component: MyProfilePageComponent, canActivate: [AuthGuard]},
@@ -16,7 +17,8 @@ const routes: Routes = [
     {path: 'chat', component: ChatPageComponent, canActivate: [AuthGuard]},
     {path: 'profile/:id', component: UserProfilePageComponent, canActivate: [AuthGuard]},
     {path: 'likes', component: LikesPageComponent, canActivate: [AuthGuard]},
-    {path: 'private-chats', component: PrivateChatsPageComponent, canActivate: [AuthGuard]}
+    {path: 'private-chats', component: PrivateChatsPageComponent, canActivate: [AuthGuard]},
+    {path: 'private-chat/:id', component: PrivateChatPageComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
