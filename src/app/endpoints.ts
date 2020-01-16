@@ -13,3 +13,5 @@ export class Endpoints {
     public static getPhotos = Endpoints.address + '/api/photo/get';
     public static deletePhotos = Endpoints.address + '/api/photo/delete';
 }
+
+

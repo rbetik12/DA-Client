@@ -104,13 +104,4 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             this.connectionErrorSub.unsubscribe();
         });
     }
-
-    likeMessage(likedMessage: MessageModel) {
-        console.log('Liked');
-        for (const message of this.messages) {
-            if (message.text === likedMessage.text) {
-                message.liked = message.liked ? !message.liked : true;
-            }
-        }
-    }
 }
