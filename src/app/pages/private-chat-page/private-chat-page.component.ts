@@ -29,10 +29,17 @@ export class PrivateChatPageComponent implements OnInit {
         });
         this.chatService.listen('getMessage').subscribe((res: MessageModel) => {
             this.messages.push(res);
+            console.log(this.messages);
         });
     }
 
     sendMessage() {
-        console.log(this.messageText);
+        this.chatService.emit('sendPMessage', {
+            twimcId: this.twimcId,
+            senderId: this.userService.getUserId(),
+            text: this.messageText,
+            roomId: this.room
+        });
+        this.messageText = '';
     }
 }
