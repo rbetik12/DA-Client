@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ChatService} from '../../services/chat.service';
 import {MessageModel} from '../../models/message.model';
 import {UserService} from '../../services/user.service';
@@ -14,13 +14,15 @@ export class PrivateChatPageComponent implements OnInit {
     messages: MessageModel[] = [{_id: '2', latitude: 20, longitude: 20, sender: 'kek', text: 'lol', userID: 'lol'}];
     room: string;
     messageText: string;
-
+    id: string;
     constructor(private activatedRoute: ActivatedRoute,
                 private chatService: ChatService,
-                private userService: UserService) {
+                private userService: UserService,
+                private router: Router) {
     }
 
     ngOnInit() {
+        this.id = this.userService.getUserId();
         this.messages = [];
         this.twimcId = this.activatedRoute.snapshot.params.id;
         this.chatService.emit('subscribe', {twimcId: this.twimcId, senderId: this.userService.getUserId()});
@@ -41,5 +43,9 @@ export class PrivateChatPageComponent implements OnInit {
             roomId: this.room
         });
         this.messageText = '';
+    }
+
+    toPM() {
+        this.router.navigateByUrl('/private-chats');
     }
 }

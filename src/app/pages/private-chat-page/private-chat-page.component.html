@@ -1,7 +1,34 @@
-<p>
-    chat with {{twimcId}}
-</p>
-<textarea [(ngModel)]="messageText" (blur)="sendMessage()"></textarea>
-<div *ngFor="let message of messages">
-    <div> {{message.text}}</div>
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="title">{{twimcId}}</ion-title>
+        <ion-icon (click)="toPM()" class="back-button" name="arrow-back" size="large"></ion-icon>
+    </ion-toolbar>
+</ion-header>
+<!--<textarea [(ngModel)]="messageText" (blur)="sendMessage()"></textarea>-->
+<!--<div *ngFor="let message of messages">-->
+<!--    <div> {{message.text}}</div>-->
+<!--</div>-->
+
+<ion-content>
+    <div *ngFor="let message of messages"
+         [ngClass]="message.userID === id ? 'my-message-wrapper' : 'others-message-wrapper'"
+         class="message-wrapper">
+        <div
+             [ngClass]="message.userID === id ? 'my-message-content' : 'others-message-content'"
+             class="message-content">
+            <div class="message-title">
+                {{message.sender}}
+            </div>
+            <div class="message-text">
+                {{message.text}}
+            </div>
+        </div>
+    </div>
+</ion-content>
+
+<div class="message-area">
+    <textarea [(ngModel)]="messageText" class="input" rows="1"></textarea>
+    <div class="send-button-container">
+        <ion-icon (click)="sendMessage()" class="send-button" name="send" size="large"></ion-icon>
+    </div>
 </div>
