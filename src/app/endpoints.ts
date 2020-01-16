@@ -12,6 +12,7 @@ export class Endpoints {
     public static uploadPhoto = Endpoints.address + '/api/photo/upload';
     public static getPhotos = Endpoints.address + '/api/photo/get';
     public static deletePhotos = Endpoints.address + '/api/photo/delete';
+    public static getMutualUsers = Endpoints.address + '/api/users/mutual-like/';
 }
 
 
