@@ -40,7 +40,8 @@ export class PrivateChatPageComponent implements OnInit {
             twimcId: this.twimcId,
             senderId: this.userService.getUserId(),
             text: this.messageText,
-            roomId: this.room
+            roomId: this.room,
+            senderName: this.userService.getCredentials().name
         });
         this.messageText = '';
     }
