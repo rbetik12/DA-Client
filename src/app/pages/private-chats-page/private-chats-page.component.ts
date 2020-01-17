@@ -3,8 +3,7 @@ import {User} from '../../models/user.interface';
 import {HttpClient} from '@angular/common/http';
 import {Endpoints} from '../../endpoints';
 import {UserService} from '../../services/user.service';
-import {Socket} from 'ngx-socket-io';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-private-chats-page',
