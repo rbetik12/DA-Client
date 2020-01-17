@@ -5,7 +5,7 @@
 </ion-header>
 <ion-content>
     <div *ngFor="let user of mutualLikeUsers">
-        <div (click)="openChat(user._id)">{{user._id}}</div>
+        <div (click)="openChat(user.name)" class="chat-label">{{user.name}}</div>
         <br>
     </div>
 </ion-content>
