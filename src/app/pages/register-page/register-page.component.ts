@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {User} from '../../models/user.interface';
+import {LoadingService} from '../../services/loading.service';
 
 export const validators = {
     email: Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]'
@@ -17,7 +18,9 @@ export const validators = {
 })
 export class RegisterPageComponent implements OnInit {
 
-    constructor(private router: Router, private auth: AuthService) {
+    constructor(private router: Router,
+                private auth: AuthService,
+                private loadingService: LoadingService) {
     }
 
     title = 'Registration';
@@ -46,9 +49,13 @@ export class RegisterPageComponent implements OnInit {
     });
 
     interests: string[] = [];
+    loading;
 
-    ngOnInit(): void {
+    async ngOnInit() {
         this.clearForm();
+        this.loading = await this.loadingService.presentLoading('Wait please').then(res => {
+            return res;
+        });
     }
 
     onSelect(selectedOptions: MatListOption[]) {
@@ -58,7 +65,8 @@ export class RegisterPageComponent implements OnInit {
         }
     }
 
-    onSubmit() {
+    async onSubmit() {
+        await this.loading.present();
         const info = this.registrationForm.value as User;
         const user: User = {
             _id: null,
@@ -72,6 +80,7 @@ export class RegisterPageComponent implements OnInit {
         };
         console.table(user);
         this.auth.register(user).subscribe(res => {
+            this.loading.dismiss();
             this.router.navigateByUrl('/login').then(r => {
             });
         }, error => {
@@ -81,6 +90,7 @@ export class RegisterPageComponent implements OnInit {
             } else if (error.status === 0) {
                 this.serverError = true;
             }
+            this.loading.dismiss();
         });
     }
 
