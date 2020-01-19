@@ -24,7 +24,7 @@ export class PrivateChatsPageComponent implements OnInit {
     loading;
 
     async ngOnInit() {
-        this.loading = await this.loadingService.presentLoading('Loading likes').then(res => {
+        this.loading = await this.loadingService.presentLoading('Loading chats').then(res => {
             return res;
         });
         await this.loading.present();
