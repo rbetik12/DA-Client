@@ -6,13 +6,13 @@
 </ion-header>
 <ion-content>
     <div *ngFor="let message of messages"
-         [ngClass]="message.userID === id ? 'my-message-wrapper' : 'others-message-wrapper'"
+         [ngClass]="message.senderId === id ? 'my-message-wrapper' : 'others-message-wrapper'"
          class="message-wrapper">
         <div
-             [ngClass]="message.userID === id ? 'my-message-content' : 'others-message-content'"
+             [ngClass]="message.senderId === id ? 'my-message-content' : 'others-message-content'"
              class="message-content">
             <div class="message-title">
-                {{message.sender}}
+                {{message.senderId === id ? this.userService.getCredentials().name : this.twimcUser.name}}
             </div>
             <div class="message-text">
                 {{message.text}}
