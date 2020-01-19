@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Endpoints} from '../../endpoints';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user.interface';
-import {Like} from "../../models/like.model";
+import {Like} from '../../models/like.model';
 
 @Component({
     selector: 'app-likes-page',
@@ -34,5 +34,4 @@ export class LikesPageComponent implements OnInit {
             console.log(res);
         });
     }
-
 }

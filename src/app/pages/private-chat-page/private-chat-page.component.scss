@@ -1,0 +1,81 @@
+.title {
+  float: left;
+  padding: 1em;
+}
+
+.message-wrapper {
+  margin: 1em 0;
+}
+
+.my-message-wrapper {
+  text-align: right;
+}
+
+.others-message-wrapper {
+  text-align: left;
+}
+
+.message-title {
+  font-weight: bold;
+}
+
+.message-content {
+  display: inline-block;
+  color: white;
+  padding: 0.5em;
+  width: 51%;
+}
+
+.my-message-content {
+  background-color: #5722b5;
+}
+
+.others-message-content {
+  background-color: #673ab7;
+}
+
+.message-area {
+}
+
+.input {
+  vertical-align: middle;
+  display: inline-block;
+  margin-left: 2em;
+  height: 80%;
+  width: 80%;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #aaaaaa;
+  border-radius: 25px;
+  padding: 5px 10px 10px 15px;
+}
+
+.input:focus {
+  outline: none;
+  border: none;
+}
+
+.send-button {
+  margin-left: 0.1em;
+  color: #7e57ff;
+}
+
+.send-button:active {
+  color: black;
+}
+
+.send-button-container {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.like-button {
+  display: inline-block;
+  text-align: right;
+}
+
+.back-button {
+  float: right;
+  padding: 0.5em;
+}
