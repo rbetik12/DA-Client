@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ChatService } from '../../services/chat.service';
-import { Subscription } from 'rxjs';
-import { AlertErrorService } from '../../services/alert-error.service';
-import { Router } from '@angular/router';
-import { MessageModel } from '../../models/message.model';
-import { UserService } from '../../services/user.service';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChatService} from '../../services/chat.service';
+import {Subscription} from 'rxjs';
+import {AlertErrorService} from '../../services/alert-error.service';
+import {Router} from '@angular/router';
+import {MessageModel} from '../../models/message.model';
+import {UserService} from '../../services/user.service';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {LoadingController} from '@ionic/angular';
 
 @Component({
     selector: 'app-chat-page',
@@ -24,15 +25,24 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     private newMessageSub: Subscription;
     private connectionErrorSub: Subscription;
 
+    loading;
+
     constructor(private chatService: ChatService,
                 private alertService: AlertErrorService,
                 private router: Router,
                 private userService: UserService,
-                private geolocation: Geolocation) {
+                private geolocation: Geolocation,
+                private loadingController: LoadingController) {
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         console.log('Init event');
+        this.loading = await this.presentLoading().then((res) => {
+            return res;
+        });
+
+        await this.loading.present();
+
         this.initGeolocation();
         this.setChatListeners();
 
@@ -40,6 +50,17 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         this.mSender = this.userService.getCredentials().name;
 
         this.chatService.emit('join', this.id);
+    }
+
+    async presentLoading() {
+        const loading = await this.loadingController.create({
+            message: 'Hellooo',
+            duration: 20000
+        });
+        return loading;
+
+        // const {role, data} = await this.loading.onDidDismiss();
+        // console.log('Loading dismissed!');
     }
 
     sendMessage() {
@@ -91,6 +112,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             console.log('Join event');
             console.table(messages);
             this.messages = Object.values(messages);
+            this.loading.dismiss();
         });
         this.newMessageSub = this.chatService.listen('newMessage').subscribe((message: MessageModel) => {
             this.messages.push(message);
