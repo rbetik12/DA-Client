@@ -57,7 +57,7 @@ export class RegisterPageComponent {
         const user: User = {
             _id: null,
             name: info.name,
-            email: info.email,
+            email: info.email.toLowerCase(),
             password: info.password,
             gender: info.gender,
             age: info.age,

@@ -30,7 +30,7 @@ export class LoginPageComponent {
     });
 
     onSubmit() {
-        const loginInfo: LoginInfo = { email: this.loginForm.value.email, password: this.loginForm.value.password };
+        const loginInfo: LoginInfo = { email: this.loginForm.value.email.toLowerCase(), password: this.loginForm.value.password };
         this.auth.login(loginInfo).pipe(first()).subscribe(res => {
                 this.error = false;
                 this.router.navigateByUrl('').then(r => {
