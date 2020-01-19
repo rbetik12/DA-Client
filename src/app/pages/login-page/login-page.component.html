@@ -19,7 +19,8 @@
             </div>
             <br>
             <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Sign in</button>
-            <div class="login-error" *ngIf="error">Incorrect email or password</div>
+            <div class="server-error" *ngIf="credsError">Incorrect email or password or server might be down</div>
+            <div class="server-error" *ngIf="serverError">Server might be down</div>
         </form>
         <a [routerLink]="['/register']" class="link">Sign up</a>
     </div>

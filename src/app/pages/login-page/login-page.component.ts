@@ -17,7 +17,8 @@ export class LoginPageComponent {
     }
 
     title = 'ReadR';
-    error = false;
+    credsError = false;
+    serverError = false;
 
     loginForm = new FormGroup({
         email: new FormControl('', [
@@ -32,13 +33,18 @@ export class LoginPageComponent {
     onSubmit() {
         const loginInfo: LoginInfo = { email: this.loginForm.value.email.toLowerCase(), password: this.loginForm.value.password };
         this.auth.login(loginInfo).pipe(first()).subscribe(res => {
-                this.error = false;
+                this.credsError = false;
+                this.serverError = false;
                 this.router.navigateByUrl('').then(r => {
                 });
             },
             error => {
                 console.error(`${error.status} ${error.statusText}`);
-                this.error = true;
+                if (error.status === 404) {
+                    this.credsError = true;
+                } else if (error.status === 0) {
+                    this.serverError = true;
+                }
             });
     }
 }
