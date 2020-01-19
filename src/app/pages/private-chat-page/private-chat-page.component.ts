@@ -3,6 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ChatService} from '../../services/chat.service';
 import {MessageModel} from '../../models/message.model';
 import {UserService} from '../../services/user.service';
+import {Endpoints} from '../../endpoints';
+import {HttpClient} from '@angular/common/http';
+import {User} from '../../models/user.interface';
 
 @Component({
     selector: 'app-private-chat-page',
@@ -15,16 +18,33 @@ export class PrivateChatPageComponent implements OnInit {
     room: string;
     messageText: string;
     id: string;
+    twimcUser: User = {
+        name: null,
+        _id: null,
+        about: null,
+        age: null,
+        email: null,
+        gender: null,
+        interests: null,
+        likes: null,
+        password: null
+    };
+
     constructor(private activatedRoute: ActivatedRoute,
                 private chatService: ChatService,
                 private userService: UserService,
-                private router: Router) {
+                private router: Router,
+                private http: HttpClient) {
     }
 
     ngOnInit() {
         this.id = this.userService.getUserId();
         this.messages = [];
         this.twimcId = this.activatedRoute.snapshot.params.id;
+        this.http.get(Endpoints.profile + '/' + this.twimcId).subscribe((res: User) => {
+            console.log(res);
+            this.twimcUser = res;
+        });
         this.chatService.emit('subscribe', {twimcId: this.twimcId, senderId: this.userService.getUserId()});
         this.chatService.listen('getRoomId').subscribe((res: string) => {
             this.room = res;
