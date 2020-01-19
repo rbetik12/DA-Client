@@ -6,6 +6,7 @@ import {UserService} from '../../services/user.service';
 import {Endpoints} from '../../endpoints';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../../models/user.interface';
+import {PrivateMessage} from '../../models/private-message.model';
 
 @Component({
     selector: 'app-private-chat-page',
@@ -14,7 +15,7 @@ import {User} from '../../models/user.interface';
 })
 export class PrivateChatPageComponent implements OnInit {
     twimcId: string;
-    messages: MessageModel[] = [{_id: '2', latitude: 20, longitude: 20, sender: 'kek', text: 'lol', userID: 'lol'}];
+    messages: PrivateMessage[];
     room: string;
     messageText: string;
     id: string;
@@ -49,7 +50,11 @@ export class PrivateChatPageComponent implements OnInit {
         this.chatService.listen('getRoomId').subscribe((res: string) => {
             this.room = res;
         });
-        this.chatService.listen('getMessage').subscribe((res: MessageModel) => {
+        this.chatService.listen('getMessagesFromDB').subscribe(res => {
+            const privateMessages: PrivateMessage[] = Object.values(res);
+            this.messages = privateMessages.concat(this.messages);
+        });
+        this.chatService.listen('getMessage').subscribe((res: PrivateMessage) => {
             this.messages.push(res);
             console.log(this.messages);
         });
