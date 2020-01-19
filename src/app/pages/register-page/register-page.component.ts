@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { MatListOption } from '@angular/material';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { User } from '../../models/user.interface';
+import {Component, OnInit} from '@angular/core';
+import {MatListOption} from '@angular/material';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
+import {User} from '../../models/user.interface';
 
 export const validators = {
     email: Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]'
@@ -15,12 +15,14 @@ export const validators = {
     templateUrl: './register-page.component.html',
     styleUrls: ['./register-page.component.scss']
 })
-export class RegisterPageComponent {
+export class RegisterPageComponent implements OnInit {
 
     constructor(private router: Router, private auth: AuthService) {
     }
 
     title = 'Registration';
+    userExistsError = false;
+    serverError = false;
 
     registrationForm = new FormGroup({
         email: new FormControl('', [
@@ -45,6 +47,10 @@ export class RegisterPageComponent {
 
     interests: string[] = [];
 
+    ngOnInit(): void {
+        this.clearForm();
+    }
+
     onSelect(selectedOptions: MatListOption[]) {
         this.interests = [];
         for (const category of selectedOptions) {
@@ -64,18 +70,38 @@ export class RegisterPageComponent {
             about: info.about,
             interests: this.interests
         };
-
         console.table(user);
         this.auth.register(user).subscribe(res => {
             this.router.navigateByUrl('/login').then(r => {
             });
         }, error => {
             console.error(error);
+            if (error.status === 409) {
+                this.userExistsError = true;
+            } else if (error.status === 0) {
+                this.serverError = true;
+            }
         });
     }
 
     goBack() {
-        this.router.navigateByUrl('/login').then(r => {});
+        this.router.navigateByUrl('/login').then(r => {
+            this.clearForm();
+        });
+    }
+
+    clearForm() {
+        this.registrationForm.reset({
+            email: null,
+            password: null,
+            name: null,
+            age: null,
+            gender: null,
+            about: null
+        });
+        this.interests = [];
+        this.serverError = false;
+        this.userExistsError = false;
     }
 
 }
