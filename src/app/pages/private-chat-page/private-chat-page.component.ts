@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ChatService} from '../../services/chat.service';
-import {MessageModel} from '../../models/message.model';
 import {UserService} from '../../services/user.service';
 import {Endpoints} from '../../endpoints';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../../models/user.interface';
 import {PrivateMessage} from '../../models/private-message.model';
+import {LoadingService} from '../../services/loading.service';
 
 @Component({
     selector: 'app-private-chat-page',
@@ -35,10 +35,17 @@ export class PrivateChatPageComponent implements OnInit {
                 private chatService: ChatService,
                 private userService: UserService,
                 private router: Router,
-                private http: HttpClient) {
+                private http: HttpClient,
+                private loadingService: LoadingService) {
     }
 
-    ngOnInit() {
+    loading;
+
+    async ngOnInit() {
+        this.loading = await this.loadingService.presentLoading('Loading chat').then(res => {
+            return res;
+        });
+        await this.loading.present();
         this.id = this.userService.getUserId();
         this.messages = [];
         this.twimcId = this.activatedRoute.snapshot.params.id;
@@ -53,6 +60,7 @@ export class PrivateChatPageComponent implements OnInit {
         this.chatService.listen('getMessagesFromDB').subscribe(res => {
             const privateMessages: PrivateMessage[] = Object.values(res);
             this.messages = privateMessages.concat(this.messages);
+            this.loading.dismiss();
         });
         this.chatService.listen('getMessage').subscribe((res: PrivateMessage) => {
             this.messages.push(res);

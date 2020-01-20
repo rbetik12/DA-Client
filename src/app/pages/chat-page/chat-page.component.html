@@ -12,7 +12,7 @@
              [ngClass]="message.userID === id ? 'my-message-content' : 'others-message-content'"
              class="message-content">
             <div class="message-title">
-                {{message.sender}}
+                {{message.userID === id ? 'Me' : message.sender}}
             </div>
             <div [ngStyle]="{'font-size': (message.coefficient * 3)+'px'}" class="message-text">
                 {{message.text}}

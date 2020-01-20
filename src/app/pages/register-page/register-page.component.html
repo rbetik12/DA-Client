@@ -49,6 +49,8 @@
             <br>
             <button mat-raised-button type="submit" [disabled]="!registrationForm.valid">Submit</button>
         </form>
+        <div class="server-error" *ngIf="userExistsError">User already exists</div>
+        <div class="server-error" *ngIf="serverError">Server might be down</div>
         <button mat-button (click)="goBack()" class="back-button">Go back</button>
     </div>
 </ion-content>

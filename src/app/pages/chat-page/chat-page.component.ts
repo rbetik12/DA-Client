@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ChatService } from '../../services/chat.service';
-import { Subscription } from 'rxjs';
-import { AlertErrorService } from '../../services/alert-error.service';
-import { Router } from '@angular/router';
-import { MessageModel } from '../../models/message.model';
-import { UserService } from '../../services/user.service';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChatService} from '../../services/chat.service';
+import {Subscription} from 'rxjs';
+import {AlertErrorService} from '../../services/alert-error.service';
+import {Router} from '@angular/router';
+import {MessageModel} from '../../models/message.model';
+import {UserService} from '../../services/user.service';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {LoadingService} from '../../services/loading.service';
 
 @Component({
     selector: 'app-chat-page',
@@ -24,15 +25,23 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     private newMessageSub: Subscription;
     private connectionErrorSub: Subscription;
 
+    loading;
+
     constructor(private chatService: ChatService,
                 private alertService: AlertErrorService,
                 private router: Router,
                 private userService: UserService,
-                private geolocation: Geolocation) {
+                private geolocation: Geolocation,
+                private loadingService: LoadingService) {
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         console.log('Init event');
+        this.loading = await this.loadingService.presentLoading('Loading chat').then((res) => {
+            return res;
+        });
+        await this.loading.present();
+
         this.initGeolocation();
         this.setChatListeners();
 
@@ -91,6 +100,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             console.log('Join event');
             console.table(messages);
             this.messages = Object.values(messages);
+            this.loading.dismiss();
         });
         this.newMessageSub = this.chatService.listen('newMessage').subscribe((message: MessageModel) => {
             this.messages.push(message);

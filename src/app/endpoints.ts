@@ -1,5 +1,5 @@
 export class Endpoints {
-    private static ip = '192.168.1.109';
+    private static ip = 'ec2-18-222-93-236.us-east-2.compute.amazonaws.com';
     private static port = ':4000';
     private static address = 'http://' + Endpoints.ip + Endpoints.port;
 

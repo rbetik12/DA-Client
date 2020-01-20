@@ -9,10 +9,10 @@
          [ngClass]="message.senderId === id ? 'my-message-wrapper' : 'others-message-wrapper'"
          class="message-wrapper">
         <div
-             [ngClass]="message.senderId === id ? 'my-message-content' : 'others-message-content'"
-             class="message-content">
+                [ngClass]="message.senderId === id ? 'my-message-content' : 'others-message-content'"
+                class="message-content">
             <div class="message-title">
-                {{message.senderId === id ? this.userService.getCredentials().name : this.twimcUser.name}}
+                {{message.senderId === id ? 'Me' : this.twimcUser.name}}
             </div>
             <div class="message-text">
                 {{message.text}}
