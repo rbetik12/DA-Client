@@ -1,5 +1,7 @@
 {
-  "name": "DA-client-mobile",
-  "integrations": {},
-  "type": "angular"
+    "name": "DA-client-mobile",
+    "integrations": {
+        "cordova": {}
+    },
+    "type": "angular"
 }

@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="title">{{user.name}}</ion-title>
+        <ion-icon (click)="toChat()" class="back-button" name="arrow-back" size="large"></ion-icon>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-slides [options]="{'slidesPerView': '2'}" pager="true">
+        <ion-slide *ngFor="let photo of user.photos; let i = index"
+                   class="slide">
+            <div *ngIf="photo">
+                <img [ngStyle]="{'height': '15em', 'width': width}" [src]="photo"
+                     alt="Profile photo didn't load :(">
+            </div>
+        </ion-slide>
+    </ion-slides>
+    <ion-button (click)="likeUser()">
+        <ion-icon name="heart" size="large"></ion-icon>
+    </ion-button>
+    <br>
+    <ion-title>About:</ion-title>
+    <ion-text class="text">{{user.about}}</ion-text>
+    <br>
+    <ion-title>Age:</ion-title>
+    <ion-text class="text">{{user.age}}</ion-text>
+    <br>
+    <ion-title>Gender:</ion-title>
+    <ion-text class="text">{{user.gender}}</ion-text>
+    <br>
+    <ion-title>Interests:</ion-title>
+    <ion-content>
+        <ion-text *ngFor="let interest of user.interests" class="text">{{interest}} <br></ion-text>
+    </ion-content>
+</ion-content>

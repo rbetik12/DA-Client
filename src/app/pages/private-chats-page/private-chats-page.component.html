@@ -1,0 +1,12 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="title">Chats</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div *ngFor="let user of mutualLikeUsers">
+        <div (click)="openChat(user._id)" class="chat-label">{{user.name}}</div>
+        <br>
+    </div>
+</ion-content>
+<app-bottom-bar></app-bottom-bar>

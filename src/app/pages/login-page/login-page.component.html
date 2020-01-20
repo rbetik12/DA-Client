@@ -1,0 +1,27 @@
+<app-top-bar [title]="title"></app-top-bar>
+<div>&#160;</div>
+<ion-content class="login-form-wrapper">
+    <div class="login-form-container">
+        <h2>Login</h2>
+        <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <mat-form-field>
+                <input matInput placeholder="Email" name="email" formControlName="email">
+            </mat-form-field>
+            <div *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.touched"
+                 class="error">Invalid email
+            </div>
+            <br>
+            <mat-form-field>
+                <input matInput placeholder="Password" type="password" name="password" formControlName="password">
+            </mat-form-field>
+            <div *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.touched"
+                 class="error">Invalid password
+            </div>
+            <br>
+            <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Sign in</button>
+            <div class="server-error" *ngIf="credsError">Incorrect email or password or server might be down</div>
+            <div class="server-error" *ngIf="serverError">Server might be down</div>
+        </form>
+        <a [routerLink]="['/register']" class="link">Sign up</a>
+    </div>
+</ion-content>
